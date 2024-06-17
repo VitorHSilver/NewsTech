@@ -13,7 +13,7 @@ class NewsController extends Controller
     public function index()
     {
 
-        return Inertia::render('News/IndexNews');
+        return Inertia::render('News/Index');
     }
 
     /**

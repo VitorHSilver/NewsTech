@@ -1,7 +1,13 @@
 <script>
-export default {
-    data() {
-        return {
+import { router, useForm } from "@inertiajs/vue3";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+    name: "Users",
+    props: {},
+    components: {},
+    setup() {
+        const form = useForm({
             firstName: "",
             lastName: "",
             email: "",
@@ -11,14 +17,35 @@ export default {
             city: "",
             region: "",
             postalCode: "",
+        });
+
+        const handleSubmit = () => {
+            form.post(route("users.store"), {
+                onSuccess: () => {
+                    console.log(form.data);
+                    router.reload({ only: ["data"] });
+                },
+                onError: () => {
+                    console.log("error");
+                },
+                onFinish: () => {
+                    form.reset();
+                },
+            });
+        };
+
+        return {
+            form,
+            handleSubmit,
         };
     },
-};
+});
 </script>
 <style></style>
 <template>
     <h1 class="text-3xl flex justify-center text-zinc-500">Criar Conta</h1>
     <div class="flex items-center justify-center">
+        <!-- alterar depois para @submit.prevent="form.get('user.index'))" -->
         <form @submit.prevent="handleSubmit">
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-10">
@@ -41,7 +68,7 @@ export default {
                                     id="first-name"
                                     autocomplete="given-name"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    v-model="firstName"
+                                    v-model="form.firstName"
                                 />
                             </div>
                         </div>
@@ -59,7 +86,7 @@ export default {
                                     id="last-name"
                                     autocomplete="family-name"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    v-model="lastName"
+                                    v-model="form.lastName"
                                 />
                             </div>
                         </div>
@@ -77,7 +104,7 @@ export default {
                                     type="email"
                                     autocomplete="email"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    v-model="email"
+                                    v-model="form.email"
                                 />
                             </div>
                         </div>
@@ -94,7 +121,7 @@ export default {
                                     name="country"
                                     autocomplete="country-name"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-[200px] sm:text-sm sm:leading-6"
-                                    v-model="country"
+                                    v-model="form.country"
                                 >
                                     <option>Brazil</option>
                                     <option>Argentina</option>
@@ -116,7 +143,7 @@ export default {
                                     id="street-address"
                                     autocomplete="street-address"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    v-model="streetAddress"
+                                    v-model="form.streetAddress"
                                 />
                             </div>
                         </div>
@@ -133,7 +160,7 @@ export default {
                                     id="postal-code"
                                     autocomplete="postal-code"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    v-model="postalCode"
+                                    v-model="form.postalCode"
                                 />
                             </div>
                         </div>
@@ -150,7 +177,7 @@ export default {
                                     id="neighborhood"
                                     autocomplete="address-level3"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    v-model="nieghborhood"
+                                    v-model="form.nieghborhood"
                                 />
                             </div>
                         </div>
@@ -167,7 +194,7 @@ export default {
                                     id="city"
                                     autocomplete="address-level2"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    v-model="city"
+                                    v-model="form.city"
                                 />
                             </div>
                         </div>
@@ -184,7 +211,7 @@ export default {
                                     id="region"
                                     autocomplete="address-level1"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    v-model="region"
+                                    v-model="form.region"
                                 />
                             </div>
                         </div>
@@ -206,10 +233,5 @@ export default {
                 </button>
             </div>
         </form>
-    </div>
-    <div style="text-align: center">
-        <h1>Resultado</h1>
-        <div>{{ (firstName) }}</div>
-        <div>{{ city }}</div>
     </div>
 </template>

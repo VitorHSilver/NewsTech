@@ -13,6 +13,7 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('Users/Index');
+
     }
 
     /**
@@ -28,7 +29,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Inertia::render('Users/Index');
     }
 
     /**
