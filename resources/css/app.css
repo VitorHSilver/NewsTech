@@ -79,5 +79,7 @@
 body {
   background-color: #ffff; /* Replace with your desired color */
   font-family: 'Arial', sans-serif;
-
+}
+img{
+  max-width: 100%;
 }
