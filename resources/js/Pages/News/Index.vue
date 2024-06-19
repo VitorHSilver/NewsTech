@@ -1,40 +1,10 @@
 <script setup>
-import {
-    Menubar,
-    MenubarContent,
-    MenubarItem,
-    MenubarMenu,
-    MenubarSeparator,
-    MenubarShortcut,
-    MenubarTrigger,
-} from "@/components/ui/menubar";
 import Articles from "./_Components/Articles.vue";
+import Footer from "./_Components/Footer.vue";
+import Menu from "./_Components/SuperiorMenu.vue";
 </script>
 <template>
-    <nav class="flex justify-between">
-        <div class="p-2">
-            <div>
-                <h1 class="text-4xl font-medium">TechNews</h1>
-            </div>
-        </div>
-        <Menubar>
-            <MenubarMenu>
-                <MenubarTrigger class="cursor-pointer">Menu</MenubarTrigger>
-                <MenubarContent>
-                    <MenubarItem>
-                        Login <MenubarShortcut></MenubarShortcut>
-                    </MenubarItem>
-                    <MenubarSeparator />
-                    <MenubarItem>Criar nova conta</MenubarItem>
-                    <MenubarSeparator />
-                    <MenubarItem>Publique sua notícia</MenubarItem>
-                    <MenubarSeparator />
-                    <MenubarItem>Quem Somos</MenubarItem>
-                </MenubarContent>
-            </MenubarMenu>
-        </Menubar>
-    </nav>
-    <!-- Main Componnent -->
+    <Menu />
     <div class="bg-slate-100 py-4 sm:py-20">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl lg:mx-0">
@@ -56,14 +26,7 @@ import Articles from "./_Components/Articles.vue";
             </div>
         </div>
     </div>
-    <footer class="p-8">
-        <div>
-            <p class="text-center text-gray-800">
-                2024 TechNews. Todos os direitos reservados.
-            </p>
-        </div>
-    </footer>
-    <!-- /Main Componnent -->
+    <Footer />
 </template>
 <style scoped>
 body {
