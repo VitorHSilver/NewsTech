@@ -1,5 +1,12 @@
 <script setup>
 import { ref } from "vue";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const articles = ref([
     {
@@ -37,7 +44,10 @@ const articles = ref([
 ]);
 </script>
 <template>
-    <article v-for="article in articles" class="space-y-2">
+    <CarouselItem
+        v-for="article in articles"
+        class="space-y-2 md:basis-1/2 lg:basis-1/3"
+    >
         <div class="flex items-center justify-between gap-4">
             <time
                 class="text-sm bg-gray-200/50 rounded-lg p-1 border-gray-400 text-gray-800"
@@ -67,5 +77,5 @@ const articles = ref([
                 <span class="leading-none">Autor</span>
             </div>
         </div>
-    </article>
+    </CarouselItem>
 </template>
