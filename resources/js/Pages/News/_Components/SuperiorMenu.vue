@@ -5,27 +5,31 @@ import {
     MenubarItem,
     MenubarMenu,
     MenubarSeparator,
-    MenubarShortcut,
     MenubarTrigger,
 } from "@/components/ui/menubar";
+import "@/Pages/Users/Index.vue";
+
+import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
     <nav class="flex justify-between">
         <div class="p-2">
             <div>
-                <h1 class="text-4xl font-medium">TechNews</h1>
+                <h1 class="text-5xl font-bold pl-2 -tracking-wider sm:text-5xl">
+                    TechNews
+                </h1>
             </div>
         </div>
         <Menubar>
             <MenubarMenu>
                 <MenubarTrigger class="cursor-pointer">Menu</MenubarTrigger>
                 <MenubarContent>
-                    <MenubarItem>
-                        Login <MenubarShortcut></MenubarShortcut>
-                    </MenubarItem>
+                    <MenubarItem> Login </MenubarItem>
                     <MenubarSeparator />
-                    <MenubarItem>Criar nova conta</MenubarItem>
+                    <MenubarItem>
+                        <Link :href="route('users.index')">Criar conta</Link>
+                    </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem>Publique sua notícia</MenubarItem>
                     <MenubarSeparator />
@@ -36,4 +40,10 @@ import {
     </nav>
 </template>
 
-<style scoped></style>
+<style scoped>
+nav {
+    color: black;
+    padding: 10px;
+    background-color: #fff;
+}
+</style>

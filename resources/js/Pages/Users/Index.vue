@@ -1,17 +1,22 @@
 <script>
-import { router, useForm } from "@inertiajs/vue3";
+import Button from "@/components/ui/button/Button.vue";
+import { router, useForm, Link } from "@inertiajs/vue3";
 import { defineComponent } from "vue";
+import { Input } from "@/components/ui/input";
+import { watch } from "vue";
 
 export default defineComponent({
     name: "Users",
     props: {},
     components: {
-        
+        Button,
+        Input,
+        Link,
     },
     setup() {
         const form = useForm({
-            firstName: "",
-            lastName: "",
+            name: "",
+            password: "",
             email: "",
             country: "",
             streetAddress: "",
@@ -24,7 +29,6 @@ export default defineComponent({
         const handleSubmit = () => {
             form.post(route("users.store"), {
                 onSuccess: () => {
-                    console.log(form.data);
                     router.reload({ only: ["data"] });
                 },
                 onError: () => {
@@ -45,9 +49,8 @@ export default defineComponent({
 </script>
 <style></style>
 <template>
-    <h1 class="text-3xl flex justify-center text-zinc-500">Criar Conta</h1>
-    <div class="flex items-center justify-center">
-        <!-- alterar depois para @submit.prevent="form.get('user.index'))" -->
+    <h1 class="text-3xl flex justify-center m-10 text-zinc-500">Criar Conta</h1>
+    <div class="flex items-center justify-center bg-slate-100 py-4 sm:py-20">
         <form @submit.prevent="handleSubmit">
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-10">
@@ -61,16 +64,16 @@ export default defineComponent({
                             <label
                                 for="first-name"
                                 class="block text-sm font-medium leading-6 text-zinc-900"
-                                >Primeiro nome</label
+                                >Nome</label
                             >
                             <div class="mt-2">
-                                <input
+                                <Input
                                     type="text"
-                                    name="first-name"
+                                    name="name"
                                     id="first-name"
                                     autocomplete="given-name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    v-model="form.firstName"
+                                    class="ring-1 ring-input h-9 capitalize"
+                                    v-model="form.name"
                                 />
                             </div>
                         </div>
@@ -79,16 +82,15 @@ export default defineComponent({
                             <label
                                 for="last-name"
                                 class="block text-sm font-medium leading-6 text-zinc-900"
-                                >Sobrenome</label
+                                >Senha</label
                             >
                             <div class="mt-2">
-                                <input
-                                    type="text"
-                                    name="last-name"
-                                    id="last-name"
-                                    autocomplete="family-name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    v-model="form.lastName"
+                                <Input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    class="ring-1 ring-input h-9"
+                                    v-model="form.password"
                                 />
                             </div>
                         </div>
@@ -100,12 +102,12 @@ export default defineComponent({
                                 >E-mail</label
                             >
                             <div class="mt-2">
-                                <input
+                                <Input
                                     id="email"
                                     name="email"
                                     type="email"
                                     autocomplete="email"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    class="ring-1 ring-input h-9 lowercase"
                                     v-model="form.email"
                                 />
                             </div>
@@ -122,7 +124,7 @@ export default defineComponent({
                                     id="country"
                                     name="country"
                                     autocomplete="country-name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-[200px] sm:text-sm sm:leading-6"
+                                    class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-black sm:max-w-[200px] sm:text-sm sm:leading-6 bg-white"
                                     v-model="form.country"
                                 >
                                     <option>Brazil</option>
@@ -139,12 +141,12 @@ export default defineComponent({
                                 >Endereço</label
                             >
                             <div class="mt-2">
-                                <input
+                                <Input
                                     type="text"
                                     name="street-address"
                                     id="street-address"
                                     autocomplete="street-address"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    class="ring-1 ring-input h-9"
                                     v-model="form.streetAddress"
                                 />
                             </div>
@@ -156,12 +158,12 @@ export default defineComponent({
                                 >CEP</label
                             >
                             <div class="mt-2">
-                                <input
-                                    type="text"
+                                <Input
+                                    type="number"
                                     name="postal-code"
                                     id="postal-code"
                                     autocomplete="postal-code"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    class="ring-1 ring-input h-9"
                                     v-model="form.postalCode"
                                 />
                             </div>
@@ -173,12 +175,12 @@ export default defineComponent({
                                 >Bairro</label
                             >
                             <div class="mt-2">
-                                <input
+                                <Input
                                     type="text"
                                     name="neighborhood"
                                     id="neighborhood"
                                     autocomplete="address-level3"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    class="ring-1 ring-input h-9"
                                     v-model="form.nieghborhood"
                                 />
                             </div>
@@ -190,12 +192,12 @@ export default defineComponent({
                                 >Cidade</label
                             >
                             <div class="mt-2">
-                                <input
+                                <Input
                                     type="text"
                                     name="city"
                                     id="city"
                                     autocomplete="address-level2"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    class="ring-1 ring-input h-9"
                                     v-model="form.city"
                                 />
                             </div>
@@ -207,12 +209,12 @@ export default defineComponent({
                                 >Estado</label
                             >
                             <div class="mt-2">
-                                <input
+                                <Input
                                     type="text"
                                     name="region"
                                     id="region"
                                     autocomplete="address-level1"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    class="ring-1 ring-input h-9"
                                     v-model="form.region"
                                 />
                             </div>
@@ -220,19 +222,16 @@ export default defineComponent({
                     </div>
                 </div>
             </div>
-            <div class="mt-6 flex items-center justify-end gap-x-6">
-                <button
-                    type="button"
-                    class="text-sm font-semibold leading-6 text-zinc-900"
-                >
-                    Cancelar
-                </button>
-                <button
-                    type="submit"
-                    class="rounded-md bg-emerald-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                    Criar
-                </button>
+
+            <div class="mt-6 flex items-center justify-end gap-x-4">
+                <Link :href="route('home')">
+                    <Button type="button" variant="secondary">Cancelar </Button>
+                </Link>
+
+                <!-- Alterar Link para home usuario -->
+                <Link :href="route('home')">
+                    <Button type="button" variant="success">Criar </Button>
+                </Link>
             </div>
         </form>
     </div>

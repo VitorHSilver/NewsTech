@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -13,7 +14,6 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('Users/Index');
-
     }
 
     /**
@@ -21,7 +21,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -29,7 +28,36 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        return Inertia::render('Users/Index');
+        // Validação dos dados do formulário
+        $data = $request->validate([
+            'name' => 'required|min:5|max:255',
+            'password' => 'required|min:6',
+            'email' => 'required|email:rfc,dns|unique:users,email',
+            'country' => 'required|min:5|max:255',
+            'streetAddress' => 'required|min:5|max:255',
+            'neighborhood' => 'required|min:5|max:255',
+            'city' => 'required|min:5|max:255',
+            'region' => 'required|min:5|max:255',
+            'postalCode' => 'required|min:5|max:255',
+
+        ]);
+
+        // Criação do usuário
+        try {
+            User::create([
+                'firstName' => $data['firstName'],
+                'lastName' => $data['lastName'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'country' => $data['country'],
+                'streetAddress' => $data['streetAddress'],
+                'neighborhood' => $data['neighborhood'],
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->route('user.create')->with('error', 'Erro ao criar usuário!');
+        }
+        // Redirecionamento ou retorno de resposta
+        return redirect()->route('user.create')->with('success', 'Usuário criado com sucesso!');
     }
 
     /**
@@ -37,7 +65,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
