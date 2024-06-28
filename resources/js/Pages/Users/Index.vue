@@ -1,7 +1,7 @@
 <script>
 import Button from "@/components/ui/button/Button.vue";
 import { router, useForm, Link } from "@inertiajs/vue3";
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { Input } from "@/components/ui/input";
 
 export default defineComponent({
@@ -39,9 +39,59 @@ export default defineComponent({
             });
         };
 
+        const formatacaoNumeroPostal = (event) => {
+            console.log(event);
+            let value = event.target.value.replace(/\D/g, "");
+            if (value.length > 5) {
+                value = value.slice(0, 5) + "-" + value.slice(5);
+            }
+            form.postalCode = value;
+        };
+
+        const handleInput = (event) => {
+            let valueCEP = event.target.value.replace(/\D/g, "");
+            if (valueCEP.length === 8) {
+                fetch(`https://viacep.com.br/ws/${valueCEP}/json/`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        // form.value.streetAddress = data.logradouro;
+                        // form.value.neighborhood = data.bairro;
+                        // form.value.city = data.localidade;
+                        // form.value.region = data.uf;
+                    })
+                    .catch((error) =>
+                        console.error("Failed to fetch CEP data:", error)
+                    );
+            }
+        };
+
+        addEventListener("change", handleInput);
+
+        const pegarCEP = (valueCEP) => {
+            if (valueCEP.length === 8) {
+                fetch(`https://viacep.com.br/ws/${valueCEP}/json/`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        
+                        console.log("Bairro", data.bairro);
+
+                        // form.value.streetAddress = data.logradouro;
+                        // form.value.neighborhood = data.bairro.value;
+                        // form.value.city = data.localidade;
+                        // form.value.region = data.uf;
+                    })
+                    .catch((error) =>
+                        console.error("Failed to fetch CEP data:", error)
+                    );
+            }
+        };
+
         return {
             form,
             handleSubmit,
+            formatacaoNumeroPostal,
+            pegarCEP,
         };
     },
 });
@@ -52,14 +102,14 @@ export default defineComponent({
     <div class="flex items-center justify-center bg-slate-100 py-4 sm:py-20">
         <form @submit.prevent="handleSubmit">
             <div class="space-y-12">
-                <div class="border-b border-gray-900/10 pb-10">
-                    <h2 class="text-base font-semibold leading-7 text-zinc-300">
+                <div class="border-b border-gray-900/10 pb-4">
+                    <h2 class="text-base font-semibold leading-6 text-zinc-300">
                         Criação de conta
                     </h2>
                     <div
                         class="mt-8 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
                     >
-                        <div class="sm:col-span-3">
+                        <div class="sm:col-span-4">
                             <label
                                 for="first-name"
                                 class="block text-sm font-medium leading-6 text-zinc-900"
@@ -77,9 +127,9 @@ export default defineComponent({
                             </div>
                         </div>
 
-                        <div class="sm:col-span-3">
+                        <div class="sm:col-span-2">
                             <label
-                                for="last-name"
+                                for="password"
                                 class="block text-sm font-medium leading-6 text-zinc-900"
                                 >Senha</label
                             >
@@ -106,12 +156,52 @@ export default defineComponent({
                                     name="email"
                                     type="email"
                                     autocomplete="email"
+                                    placeholder="email@email.com"
                                     class="ring-1 ring-input h-9 lowercase"
                                     v-model="form.email"
                                 />
                             </div>
                         </div>
+                        <!--  -->
+                        <div class="sm:col-span-2">
+                            <label
+                                for="postal-code"
+                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                >CEP</label
+                            >
+                            <div class="mt-2">
+                                <Input
+                                    type="text"
+                                    name="postal-code"
+                                    id="postal-code"
+                                    class="ring-1 ring-input h-9"
+                                    v-model="form.postalCode"
+                                    placeholder="00000-000"
+                                    @input="formatacaoNumeroPostal"
+                                    maxlength="9"
+                                />
+                            </div>
+                        </div>
 
+                        <!--  -->
+
+                        <div class="sm:col-span-4">
+                            <label
+                                for="street-address"
+                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                >Endereço</label
+                            >
+                            <div class="mt-2">
+                                <Input
+                                    type="text"
+                                    name="street-address"
+                                    id="street-address"
+                                    autocomplete="street-address"
+                                    class="ring-1 ring-input h-9 lowercase"
+                                    v-model="form.streetAddress"
+                                />
+                            </div>
+                        </div>
                         <div class="sm:col-span-2">
                             <label
                                 for="country"
@@ -133,40 +223,6 @@ export default defineComponent({
                             </div>
                         </div>
 
-                        <div class="sm:col-span-4">
-                            <label
-                                for="street-address"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
-                                >Endereço</label
-                            >
-                            <div class="mt-2">
-                                <Input
-                                    type="text"
-                                    name="street-address"
-                                    id="street-address"
-                                    autocomplete="street-address"
-                                    class="ring-1 ring-input h-9"
-                                    v-model="form.streetAddress"
-                                />
-                            </div>
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label
-                                for="postal-code"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
-                                >CEP</label
-                            >
-                            <div class="mt-2">
-                                <Input
-                                    type="number"
-                                    name="postal-code"
-                                    id="postal-code"
-                                    autocomplete="postal-code"
-                                    class="ring-1 ring-input h-9"
-                                    v-model="form.postalCode"
-                                />
-                            </div>
-                        </div>
                         <div class="sm:col-span-2 sm:col-start-1">
                             <label
                                 for="neighborhood"
