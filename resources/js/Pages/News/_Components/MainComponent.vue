@@ -8,7 +8,7 @@ import {
 import Articles from "./Articles.vue";
 </script>
 <template>
-    <div class="bg-slate-100 py-4 sm:py-24">
+    <div class="bg-slate-100 py-4 sm:py-20">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto lg:mx-0 mb-8">
                 <h2

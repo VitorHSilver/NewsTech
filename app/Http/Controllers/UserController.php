@@ -54,6 +54,10 @@ class UserController extends Controller
                 'neighborhood' => $data['neighborhood'],
             ]);
         } catch (\Throwable $th) {
+            // quero mostrar na pagina o erro
+            // if (env('APP_DEBUG')) {
+            //     return redirect()->route('user.create')->with('error', $th->getMessage());
+            // }
             return redirect()->route('user.create')->with('error', 'Erro ao criar usuário!');
         }
         // Redirecionamento ou retorno de resposta
@@ -65,7 +69,6 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        
     }
 
     /**

@@ -3,7 +3,6 @@ import Button from "@/components/ui/button/Button.vue";
 import { router, useForm, Link } from "@inertiajs/vue3";
 import { defineComponent } from "vue";
 import { Input } from "@/components/ui/input";
-import { watch } from "vue";
 
 export default defineComponent({
     name: "Users",
