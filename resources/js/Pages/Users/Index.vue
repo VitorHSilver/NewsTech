@@ -3,6 +3,7 @@ import Button from "@/components/ui/button/Button.vue";
 import { router, useForm, Link } from "@inertiajs/vue3";
 import { defineComponent, ref } from "vue";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 
 export default defineComponent({
     name: "Users",
@@ -39,59 +40,36 @@ export default defineComponent({
             });
         };
 
-        const formatacaoNumeroPostal = (event) => {
-            console.log(event);
+        const zipCodeFormatting = (event) => {
             let value = event.target.value.replace(/\D/g, "");
+
             if (value.length > 5) {
                 value = value.slice(0, 5) + "-" + value.slice(5);
             }
+
             form.postalCode = value;
         };
 
-        const handleInput = (event) => {
-            let valueCEP = event.target.value.replace(/\D/g, "");
-            if (valueCEP.length === 8) {
-                fetch(`https://viacep.com.br/ws/${valueCEP}/json/`)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data);
-                        // form.value.streetAddress = data.logradouro;
-                        // form.value.neighborhood = data.bairro;
-                        // form.value.city = data.localidade;
-                        // form.value.region = data.uf;
-                    })
-                    .catch((error) =>
-                        console.error("Failed to fetch CEP data:", error)
-                    );
-            }
-        };
-
-        addEventListener("change", handleInput);
-
-        const pegarCEP = (valueCEP) => {
-            if (valueCEP.length === 8) {
-                fetch(`https://viacep.com.br/ws/${valueCEP}/json/`)
-                    .then((response) => response.json())
-                    .then((data) => {
-                        
-                        console.log("Bairro", data.bairro);
-
-                        // form.value.streetAddress = data.logradouro;
-                        // form.value.neighborhood = data.bairro.value;
-                        // form.value.city = data.localidade;
-                        // form.value.region = data.uf;
-                    })
-                    .catch((error) =>
-                        console.error("Failed to fetch CEP data:", error)
-                    );
-            }
+        const searchCEP = (valueCEP) => {
+            axios
+                .get(`https://viacep.com.br/ws/${valueCEP}/json/`)
+                .then((response) => {
+                    form.neighborhood = response.data.bairro;
+                    form.city = response.data.localidade;
+                    form.region = response.data.uf;
+                    form.country = "Brazil";
+                    form.streetAddress = response.data.logradouro;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         };
 
         return {
             form,
             handleSubmit,
-            formatacaoNumeroPostal,
-            pegarCEP,
+            zipCodeFormatting,
+            searchCEP,
         };
     },
 });
@@ -177,7 +155,7 @@ export default defineComponent({
                                     class="ring-1 ring-input h-9"
                                     v-model="form.postalCode"
                                     placeholder="00000-000"
-                                    @input="formatacaoNumeroPostal"
+                                    @input="zipCodeFormatting"
                                     maxlength="9"
                                 />
                             </div>
@@ -197,7 +175,7 @@ export default defineComponent({
                                     name="street-address"
                                     id="street-address"
                                     autocomplete="street-address"
-                                    class="ring-1 ring-input h-9 lowercase"
+                                    class="ring-1 ring-input h-9 capitalize"
                                     v-model="form.streetAddress"
                                 />
                             </div>
@@ -213,7 +191,7 @@ export default defineComponent({
                                     id="country"
                                     name="country"
                                     autocomplete="country-name"
-                                    class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-black sm:max-w-[200px] sm:text-sm sm:leading-6 bg-white"
+                                    class="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-black sm:max-w-[200px] sm:text-sm sm:leading-6 bg-white p-2"
                                     v-model="form.country"
                                 >
                                     <option>Brazil</option>
@@ -236,7 +214,7 @@ export default defineComponent({
                                     id="neighborhood"
                                     autocomplete="address-level3"
                                     class="ring-1 ring-input h-9"
-                                    v-model="form.nieghborhood"
+                                    v-model="form.neighborhood"
                                 />
                             </div>
                         </div>
