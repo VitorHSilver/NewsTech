@@ -13,7 +13,6 @@ class News extends Model
     ];
 
 
-    
 
     public function user()
     {

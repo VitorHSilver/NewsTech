@@ -21,6 +21,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        
     }
 
     /**
@@ -31,46 +32,51 @@ class UserController extends Controller
         // Validação dos dados do formulário
         $data = $request->validate([
             'name' => 'required|min:5|max:255',
-            'password' => 'required|min:6',
+            'password' => 'required|min:3|max:255',
             'email' => 'required|email:rfc,dns|unique:users,email',
             'postalCode' => 'required|min:5|max:255',
             'streetAddress' => 'required|min:5|max:255',
             'country' => 'required|min:5|max:255',
             'neighborhood' => 'required|min:5|max:255',
             'city' => 'required|min:5|max:255',
-            'region' => 'required|min:5|max:255',
-
+            'region' => 'required|min:2|max:255',
         ]);
-
         // Criação do usuário
         try {
-            User::create([
-                'name' => $data['name'],
+
+            $user = User::create([
+                'name' => strtolower($data['name']),
                 'password' => bcrypt($data['password']),
                 'email' => $data['email'],
                 'postalCode' => $data['postalCode'],
-                'streetAddress' => $data['streetAddress'],
-                'country' => $data['country'],
-                'neighborhood' => $data['neighborhood'],
-                'city' => $data['city'],
-                'region' => $data['region'],
+                'streetAddress' => strtolower($data['streetAddress']),
+                'country' => strtolower($data['country']),
+                'neighborhood' => strtolower($data['neighborhood']),
+                'city' => strtolower($data['city']),
+                'region' => strtolower($data['region']),
             ]);
+            $user->save();
         } catch (\Throwable $th) {
-            // quero mostrar na pagina o erro
-            // if (env('APP_DEBUG')) {
-            //     return redirect()->route('user.create')->with('error', $th->getMessage());
-            // }
-            return redirect()->route('user.create')->with('error', 'Erro ao criar usuário!');
+            if (env('APP_DEBUG')) {
+                dd($th->getMessage());
+                return redirect()->route('home')->with('error', $th->getMessage());
+            }
         }
-        // Redirecionamento ou retorno de resposta
-        return redirect()->route('user.create')->with('success', 'Usuário criado com sucesso!');
+        // Redirecionamento para a página de perfil do usuário
+        return redirect()->route('users.show');
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
+        $user = User::find($user->id);
+
+        return Inertia::render('Users/Show', [
+            'user' => $user,
+        ]);
     }
 
     /**

@@ -29,10 +29,11 @@ export default defineComponent({
         const handleSubmit = () => {
             form.post(route("users.store"), {
                 onSuccess: () => {
-                    router.reload({ only: ["data"] });
+                    console.log("success");
                 },
-                onError: () => {
-                    console.log("error");
+                onError: (error) => {
+                    console.log("error on submit");
+                    console.log("Erro:", TypeError, error);
                 },
                 onFinish: () => {
                     form.reset();
@@ -74,7 +75,7 @@ export default defineComponent({
     },
 });
 </script>
-<style></style>
+
 <template>
     <h1 class="text-3xl flex justify-center m-10 text-zinc-500">Criar Conta</h1>
     <div class="flex items-center justify-center bg-slate-100 py-4 sm:py-20">
@@ -137,6 +138,7 @@ export default defineComponent({
                                     placeholder="email@email.com"
                                     class="ring-1 ring-input h-9 lowercase"
                                     v-model="form.email"
+                                    @input="emailCheck"
                                 />
                             </div>
                         </div>
@@ -262,9 +264,7 @@ export default defineComponent({
                 </Link>
 
                 <!-- Alterar Link para home usuario -->
-                <Link :href="route('home')">
-                    <Button type="button" variant="success">Criar </Button>
-                </Link>
+                <Button variant="success" type="submit">Criar</Button>
             </div>
         </form>
     </div>
