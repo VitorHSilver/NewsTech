@@ -15,6 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('postalCode')->number_format(8);
+            $table->string('streetAddress')->nullable();
+            $table->string('country')->nullable();
+            $table->string('neighborhood')->nullable();
+            $table->string('city')->nullable();
+            $table->string('region')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -45,4 +51,6 @@ return new class extends Migration
         Schema::dropColumns('password_reset_tokens');
         Schema::dropColumns('sessions');
     }
+
+ 
 };

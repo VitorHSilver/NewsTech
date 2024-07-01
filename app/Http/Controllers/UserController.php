@@ -33,25 +33,27 @@ class UserController extends Controller
             'name' => 'required|min:5|max:255',
             'password' => 'required|min:6',
             'email' => 'required|email:rfc,dns|unique:users,email',
-            'country' => 'required|min:5|max:255',
+            'postalCode' => 'required|min:5|max:255',
             'streetAddress' => 'required|min:5|max:255',
+            'country' => 'required|min:5|max:255',
             'neighborhood' => 'required|min:5|max:255',
             'city' => 'required|min:5|max:255',
             'region' => 'required|min:5|max:255',
-            'postalCode' => 'required|min:5|max:255',
 
         ]);
 
         // Criação do usuário
         try {
             User::create([
-                'firstName' => $data['firstName'],
-                'lastName' => $data['lastName'],
-                'email' => $data['email'],
+                'name' => $data['name'],
                 'password' => bcrypt($data['password']),
-                'country' => $data['country'],
+                'email' => $data['email'],
+                'postalCode' => $data['postalCode'],
                 'streetAddress' => $data['streetAddress'],
+                'country' => $data['country'],
                 'neighborhood' => $data['neighborhood'],
+                'city' => $data['city'],
+                'region' => $data['region'],
             ]);
         } catch (\Throwable $th) {
             // quero mostrar na pagina o erro

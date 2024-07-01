@@ -46,8 +46,8 @@ export default defineComponent({
             if (value.length > 5) {
                 value = value.slice(0, 5) + "-" + value.slice(5);
             }
-
             form.postalCode = value;
+            searchCEP(value);
         };
 
         const searchCEP = (valueCEP) => {
