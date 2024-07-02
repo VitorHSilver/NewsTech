@@ -4,6 +4,7 @@ import { router, useForm, Link } from "@inertiajs/vue3";
 import { defineComponent, ref } from "vue";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
+import { toast } from "vue3-toastify";
 
 export default defineComponent({
     name: "Users",
@@ -26,6 +27,7 @@ export default defineComponent({
             postalCode: "",
         });
 
+        // handle no Formulario
         const handleSubmit = () => {
             form.post(route("users.store"), {
                 onSuccess: () => {
@@ -41,6 +43,7 @@ export default defineComponent({
             });
         };
 
+        // acrecentando ' - ' no CEP e chamando a função de busca
         const zipCodeFormatting = (event) => {
             let value = event.target.value.replace(/\D/g, "");
 
@@ -51,6 +54,7 @@ export default defineComponent({
             searchCEP(value);
         };
 
+        // Função para buscar CEP
         const searchCEP = (valueCEP) => {
             axios
                 .get(`https://viacep.com.br/ws/${valueCEP}/json/`)
@@ -104,6 +108,8 @@ export default defineComponent({
                                     v-model="form.name"
                                 />
                             </div>
+                            <!-- Customizar a mensagem de erro -->
+                            {{ form.errors.name }}
                         </div>
 
                         <div class="sm:col-span-2">
@@ -123,7 +129,7 @@ export default defineComponent({
                             </div>
                         </div>
 
-                        <div class="sm:col-span-4">
+                        <div class="sm:col-span-4 inputEmail">
                             <label
                                 for="email"
                                 class="block text-sm font-medium leading-6 text-zinc-900"
@@ -138,8 +144,8 @@ export default defineComponent({
                                     placeholder="email@email.com"
                                     class="ring-1 ring-input h-9 lowercase"
                                     v-model="form.email"
-                                    @input="emailCheck"
                                 />
+                                {{ form.errors.name }}
                             </div>
                         </div>
                         <!--  -->
