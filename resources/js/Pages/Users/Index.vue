@@ -38,7 +38,7 @@ export default defineComponent({
                     console.log("Erro:", TypeError, error);
                 },
                 onFinish: () => {
-                    form.reset();
+                    if (!form.errors) form.reset();
                 },
             });
         };
@@ -108,8 +108,9 @@ export default defineComponent({
                                     v-model="form.name"
                                 />
                             </div>
-                            <!-- Customizar a mensagem de erro -->
-                            {{ form.errors.name }}
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.name }}
+                            </span>
                         </div>
 
                         <div class="sm:col-span-2">
@@ -127,6 +128,9 @@ export default defineComponent({
                                     v-model="form.password"
                                 />
                             </div>
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.password }}
+                            </span>
                         </div>
 
                         <div class="sm:col-span-4 inputEmail">
@@ -145,10 +149,12 @@ export default defineComponent({
                                     class="ring-1 ring-input h-9 lowercase"
                                     v-model="form.email"
                                 />
-                                {{ form.errors.name }}
                             </div>
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.email }}
+                            </span>
                         </div>
-                        <!--  -->
+
                         <div class="sm:col-span-2">
                             <label
                                 for="postal-code"
@@ -167,9 +173,10 @@ export default defineComponent({
                                     maxlength="9"
                                 />
                             </div>
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.postalCode }}
+                            </span>
                         </div>
-
-                        <!--  -->
 
                         <div class="sm:col-span-4">
                             <label
@@ -187,6 +194,9 @@ export default defineComponent({
                                     v-model="form.streetAddress"
                                 />
                             </div>
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.streetAddress }}
+                            </span>
                         </div>
                         <div class="sm:col-span-2">
                             <label
@@ -207,6 +217,9 @@ export default defineComponent({
                                     <option>Unites States</option>
                                 </select>
                             </div>
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.country }}
+                            </span>
                         </div>
 
                         <div class="sm:col-span-2 sm:col-start-1">
@@ -225,7 +238,11 @@ export default defineComponent({
                                     v-model="form.neighborhood"
                                 />
                             </div>
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.neighborhood }}
+                            </span>
                         </div>
+
                         <div class="sm:col-span-2">
                             <label
                                 for="city"
@@ -242,6 +259,9 @@ export default defineComponent({
                                     v-model="form.city"
                                 />
                             </div>
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.city }}
+                            </span>
                         </div>
                         <div class="sm:col-span-2">
                             <label
@@ -259,6 +279,9 @@ export default defineComponent({
                                     v-model="form.region"
                                 />
                             </div>
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.region }}
+                            </span>
                         </div>
                     </div>
                 </div>
