@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -149,4 +149,4 @@ const showingNavigationDropdown = ref(false);
             </main>
         </div>
     </div>
-</template>
+</template> -->

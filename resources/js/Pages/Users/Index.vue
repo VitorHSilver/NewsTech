@@ -4,7 +4,7 @@ import { router, useForm, Link } from "@inertiajs/vue3";
 import { defineComponent, ref } from "vue";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
-import { toast } from "vue3-toastify";
+import Menu from "/resources/js/Pages/News/_Components/SuperiorMenu.vue";
 
 export default defineComponent({
     name: "Users",
@@ -13,6 +13,7 @@ export default defineComponent({
         Button,
         Input,
         Link,
+        Menu,
     },
     setup() {
         const form = useForm({
@@ -81,12 +82,15 @@ export default defineComponent({
 </script>
 
 <template>
-    <h1 class="text-3xl flex justify-center m-10 text-zinc-500">Criar Conta</h1>
-    <div class="flex items-center justify-center bg-slate-100 py-4 sm:py-20">
+    <Menu/>
+    <!-- <h1 class="text-3xl flex justify-center m-10 text-zinc-100"></h1> -->
+    <div
+        class="flex items-center justify-center backgroundProject py-4 sm:py-20"
+    >
         <form @submit.prevent="handleSubmit">
             <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-4">
-                    <h2 class="text-base font-semibold leading-6 text-zinc-300">
+                    <h2 class="text-base font-semibold leading-6 text-zinc-700">
                         Criação de conta
                     </h2>
                     <div
@@ -95,7 +99,7 @@ export default defineComponent({
                         <div class="sm:col-span-4">
                             <label
                                 for="first-name"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                class="block text-sm font-medium leading-6 text-zinc-200"
                                 >Nome</label
                             >
                             <div class="mt-2">
@@ -116,7 +120,7 @@ export default defineComponent({
                         <div class="sm:col-span-2">
                             <label
                                 for="password"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                class="block text-sm font-medium leading-6 text-zinc-200"
                                 >Senha</label
                             >
                             <div class="mt-2">
@@ -136,7 +140,7 @@ export default defineComponent({
                         <div class="sm:col-span-4 inputEmail">
                             <label
                                 for="email"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                class="block text-sm font-medium leading-6 text-zinc-200"
                                 >E-mail</label
                             >
                             <div class="mt-2">
@@ -158,7 +162,7 @@ export default defineComponent({
                         <div class="sm:col-span-2">
                             <label
                                 for="postal-code"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                class="block text-sm font-medium leading-6 text-zinc-200"
                                 >CEP</label
                             >
                             <div class="mt-2">
@@ -181,7 +185,7 @@ export default defineComponent({
                         <div class="sm:col-span-4">
                             <label
                                 for="street-address"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                class="block text-sm font-medium leading-6 text-zinc-200"
                                 >Endereço</label
                             >
                             <div class="mt-2">
@@ -201,7 +205,7 @@ export default defineComponent({
                         <div class="sm:col-span-2">
                             <label
                                 for="country"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                class="block text-sm font-medium leading-6 text-zinc-200"
                                 >Pais</label
                             >
                             <div class="mt-2">
@@ -225,7 +229,7 @@ export default defineComponent({
                         <div class="sm:col-span-2 sm:col-start-1">
                             <label
                                 for="neighborhood"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                class="block text-sm font-medium leading-6 text-zinc-200"
                                 >Bairro</label
                             >
                             <div class="mt-2">
@@ -246,7 +250,7 @@ export default defineComponent({
                         <div class="sm:col-span-2">
                             <label
                                 for="city"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                class="block text-sm font-medium leading-6 text-zinc-200"
                                 >Cidade</label
                             >
                             <div class="mt-2">
@@ -266,7 +270,7 @@ export default defineComponent({
                         <div class="sm:col-span-2">
                             <label
                                 for="region"
-                                class="block text-sm font-medium leading-6 text-zinc-900"
+                                class="block text-sm font-medium leading-6 text-zinc-200"
                                 >Estado</label
                             >
                             <div class="mt-2">

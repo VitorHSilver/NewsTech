@@ -77,8 +77,11 @@
   }
 }
 body {
-  background-color: #ffff; /* Replace with your desired color */
   font-family: 'Arial', sans-serif;
+  background: linear-gradient(to right, #242732, #021763, #141B37); /* Replace with your desired color */
+}
+.backgroundProject {
+  background: linear-gradient(to right, #242732, #021763, #141B37); /* Replace with your desired color */
 }
 img{
   max-width: 100%;
