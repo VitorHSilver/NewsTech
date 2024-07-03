@@ -17,7 +17,9 @@ export default defineComponent({
 
 <template>
     <Menu />
-    <Main />
+    <div class="px-6">
+        <Main />
+    </div>
     <Footer />
 </template>
 

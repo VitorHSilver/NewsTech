@@ -66,7 +66,11 @@ const articles = ref([
                 <span>{{ article.category }}</span>
             </div>
         </div>
-        <img :src="article.image" alt="Imagem da notícia" class="rounded-xl w-full" />
+        <img
+            :src="article.image"
+            alt="Imagem da notícia"
+            class="rounded-xl w-full"
+        />
         <div class="space-y-4">
             <h3 class="text-xl truncate font-semibold text-gray-100">
                 {{ article.title }}

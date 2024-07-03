@@ -15,9 +15,7 @@ import { Link } from "@inertiajs/vue3";
     <nav class="flex justify-between backgroundProject">
         <div class="p-2">
             <div>
-                <h1
-                    class="text-5xl font-bold pl-2 sm:text-5xl titulo"
-                >
+                <h1 class="text-5xl font-bold sm:text-5xl titulo">
                     TechNews
                 </h1>
             </div>
@@ -60,6 +58,7 @@ nav {
     font-family: "Fira Sans", sans-serif;
     font-weight: normal;
     letter-spacing: 1px;
+    font-size: 3.5rem;
 }
 
 .menu-mobile {
