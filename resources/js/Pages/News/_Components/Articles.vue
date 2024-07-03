@@ -56,7 +56,7 @@ const articles = ref([
     >
         <div class="flex items-center justify-between gap-4">
             <time
-                class="text-sm bg-gray-200/50 rounded-lg p-1 border-gray-400 text-gray-800"
+                class="text-xs bg-gray-200/50 rounded-lg p-1 border-gray-400 text-gray-800"
                 >{{ article.date }}</time
             >
             <div
@@ -68,13 +68,13 @@ const articles = ref([
         </div>
         <img :src="article.image" alt="Imagem da notícia" class="rounded-xl w-full" />
         <div class="space-y-4">
-            <h3 class="text-xl truncate font-semibold text-gray-900">
+            <h3 class="text-xl truncate font-semibold text-gray-100">
                 {{ article.title }}
             </h3>
-            <p class="mt-2 text-sm text-gray-600 comment f">
+            <p class="mt-2 text-sm text-gray-400 comment f">
                 {{ article.description }}
             </p>
-            <div class="relative flex items-center gap-3">
+            <div class="relative flex items-center gap-3 text-gray-500">
                 <img
                     :src="article.author"
                     alt=""

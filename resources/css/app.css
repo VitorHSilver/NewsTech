@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -75,9 +75,14 @@
   body {
     @apply bg-background text-foreground;
   }
+  .text-colorFont{
+    color: #fafafa;
+  }
+  .text-customColor{
+    color: rgba(255, 241, 17);
+  }
 }
-body {
-  font-family: 'Arial', sans-serif;
+html, body {
   background: linear-gradient(to right, #242732, #021763, #141B37); /* Replace with your desired color */
 }
 .backgroundProject {
@@ -86,3 +91,4 @@ body {
 img{
   max-width: 100%;
 }
+

@@ -1,19 +1,21 @@
 <script>
+import { defineAsyncComponent } from "vue";
 import Button from "@/components/ui/button/Button.vue";
 import { router, useForm, Link } from "@inertiajs/vue3";
 import { defineComponent, ref } from "vue";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
-import Menu from "/resources/js/Pages/News/_Components/SuperiorMenu.vue";
 
 export default defineComponent({
     name: "Users",
     props: {},
     components: {
+        SuperiorMenu: defineAsyncComponent(() =>
+            import("../News/_Components/SuperiorMenu.vue")
+        ),
         Button,
         Input,
         Link,
-        Menu,
     },
     setup() {
         const form = useForm({
@@ -82,8 +84,8 @@ export default defineComponent({
 </script>
 
 <template>
-    <Menu/>
-    <!-- <h1 class="text-3xl flex justify-center m-10 text-zinc-100"></h1> -->
+    <SuperiorMenu />
+    <!-- Colocar uma condicional no menu -->
     <div
         class="flex items-center justify-center backgroundProject py-4 sm:py-20"
     >

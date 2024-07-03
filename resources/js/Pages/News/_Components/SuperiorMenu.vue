@@ -15,14 +15,18 @@ import { Link } from "@inertiajs/vue3";
     <nav class="flex justify-between backgroundProject">
         <div class="p-2">
             <div>
-                <h1 class="text-5xl font-bold pl-2 sm:text-5xl titulo">
+                <h1
+                    class="text-5xl font-bold pl-2 sm:text-5xl titulo"
+                >
                     TechNews
                 </h1>
             </div>
         </div>
         <Menubar class="header bg-#141B37">
             <MenubarMenu>
-                <MenubarTrigger class="cursor-pointer menu-mobile"></MenubarTrigger>
+                <MenubarTrigger
+                    class="cursor-pointer menu-mobile"
+                ></MenubarTrigger>
                 <MenubarContent>
                     <MenubarItem> Login </MenubarItem>
                     <MenubarSeparator />
@@ -61,7 +65,7 @@ nav {
 .menu-mobile {
     display: flex;
 
-    background: #141B37;
+    background: #141b37;
 
     border: none;
 
