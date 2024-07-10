@@ -15,7 +15,7 @@ import { Link } from "@inertiajs/vue3";
     <nav class="flex justify-between backgroundProject">
         <div class="py-2">
             <div>
-                <h1 class="text-5xl font-bold sm:text-5xl titulo pl-6 p-2">
+                <h1 class="text-5xl font-bold sm:text-5xl titulo p-2 pl-7">
                     TechNews
                 </h1>
             </div>
@@ -26,7 +26,9 @@ import { Link } from "@inertiajs/vue3";
                     class="cursor-pointer menu-mobile"
                 ></MenubarTrigger>
                 <MenubarContent>
-                    <MenubarItem> Login </MenubarItem>
+                    <MenubarItem>
+                        <Link :href="route('login')">Login</Link>
+                    </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem>
                         <Link :href="route('users.index')">Criar conta</Link>

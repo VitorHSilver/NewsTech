@@ -1,33 +1,49 @@
+<script setup>
+import { ref } from "vue";
+
+const tabs = ref([
+    {
+        name: "Hardware",
+        href: "#hardware",
+        style: "hover:text-yellow-500 ",
+    },
+    {
+        name: "Games",
+        href: "#games",
+        style: "hover:text-green-500",
+    },
+    {
+        name: "Tech",
+        href: "#tech",
+        style: "hover:text-blue-500",
+    },
+    {
+        name: "Bitcoin",
+        href: "#bitcoin",
+        style: "hover:text-gray-400",
+    },
+    {
+        name: "Analysis",
+        href: "#analysis",
+        style: "hover:text-red-400",
+    },
+    {
+        name: "Movie",
+        href: "#movie",
+        style: "hover:text-violet-400",
+    },
+]);
+</script>
+
 <template>
-    <div class="flex flex-col">
-        <div>
-            <h1 class="pb-4 text-white text-3xl">Ultimas Noticias</h1>
-        </div>
-        <div>
-            <ul class="flex gap-4 pb-4">
-                <li>
-                    <a
-                        href="#hardware"
-                        class="text-white text-sm bg-slate-700 p-1 rounded-xl"
-                        >Hardware</a
-                    >
-                </li>
-                <li>
-                    <a href="#games" class="text-white text-sm">Games</a>
-                </li>
-                <li>
-                    <a href="#tech" class="text-white text-sm">Tech</a>
-                </li>
-                <li>
-                    <a href="#bitcoin" class="text-white text-sm">Bitcoin</a>
-                </li>
-                <li>
-                    <a href="#analysis" class="text-white text-sm">Analysis</a>
-                </li>
-                <li>
-                    <a href="#movie" class="text-white text-sm">Movie</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <ul class="flex flex-wrap items-center gap-8 pb-4">
+        
+        <li v-for="tab in tabs">
+            <a
+                :href="tab.href"
+                :class="['text-gray-100 hover:bg-slate-700/50 text-sm p-2 rounded-xl', tab.style]"
+                >{{ tab.name }}</a
+            >
+        </li>
+    </ul>
 </template>

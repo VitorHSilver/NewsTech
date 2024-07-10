@@ -8,16 +8,8 @@ import {
 import Articles from "./Articles.vue";
 </script>
 <template>
-    <div>
-        
-    </div>
-    <div class="py-10">
-        <Carousel
-            class="relative"
-            :opts="{
-                align: 'start',
-            }"
-        >
+    <div class="py-4">
+        <Carousel class="relative" :opts="{ align: 'start'}">
             <CarouselContent class="-ml-1">
                 <Articles />
             </CarouselContent>

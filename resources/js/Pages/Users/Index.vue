@@ -87,10 +87,10 @@ export default defineComponent({
     <SuperiorMenu />
     <!-- Colocar uma condicional no menu -->
     <div
-        class="flex items-center justify-center backgroundProject py-4 sm:py-20"
+        class="flex items-center justify-center backgroundProject py-4 sm:py-20 "
     >
         <form @submit.prevent="handleSubmit">
-            <div class="space-y-12">
+            <div class="space-y-12 ">
                 <div class="border-b border-gray-900/10 pb-4">
                     <h2 class="text-base font-semibold leading-6 text-zinc-700">
                         Criação de conta

@@ -11,9 +11,7 @@ const articles = ref([
         image: "img/bitcoin.jpg",
         description:
             "Explicando como aconteceu um dos maiores roubo de moeda virtual até o momento. Onde o Hacker levou 1 milhão de BitCoins, veja detalhes sobre o caso. que está dando o que falar.",
-        style: "bg-blue-400/50 border-blue-400 text-blue-800",
-        styleDate:
-            "bg-gray-200/50 rounded-sm p-1 border-gray-400 text-gray-800",
+        style: "bg-gray-400/50 border-blue-400 text-gray-200",
     },
     {
         title: "Notas de Elden Ring: Shadow of the Erdtree",
@@ -23,7 +21,7 @@ const articles = ref([
         image: "img/autor_games.jpg",
         description:
             "Hidetaka Miyazaki já havia dito que o Reino das Sombras, o novo mapa da DLC de Elden Ring, focaria em verticalidade e isso está muito enfatizado ao jogar. É possível ir muito baixo no cenário e também chegar bem alto, com o caminho se conectando de forma muito inteligente e desafiador, às vezes mais difícil que os chefes.",
-        style: "bg-emerald-400/50 border-emerald-400 text-emerald-800",
+        style: "bg-emerald-400/50 border-emerald-400 text-gray-200",
     },
     {
         title: "Roteadores da ASUS",
@@ -33,27 +31,42 @@ const articles = ref([
         author: "img/autor_hardware.jpg",
         description:
             "Roteador da Asus apresentam problemas de vunerabilidade de segundo especialistas em segurança. A empresa já está ciente do problema e está trabalhando para corrigir o problema.",
-        style: "bg-yellow-400/50 border-yellow-400 text-yellow-800",
+        style: "bg-yellow-400/90 border-yellow-400 text-gray-200",
     },
     {
-        title: "Maior roubo já feito em bitcoin!",
-        category: "BitCoin",
-        date: "Apri 29, 2024",
-        author: "img/autor_bitcoin.jpg",
-        image: "img/bitcoin.jpg",
+        title: "Galaxy Ring da Samsung é o anel inteligente mais confortável do mercado",
+        category: "Tech",
+        date: "June 29, 2024",
+        author: "img/autor_games.jpg",
+        image: "img/ring.jpg",
         description:
-            "Explicando como aconteceu um dos maiores roubo de moeda virtual até o momento. Onde o Hacker levou 1 milhão de BitCoins, veja detalhes sobre o caso. que está dando o que falar.",
-        style: "bg-blue-400/50 border-blue-400 text-blue-800",
-        styleDate:
-            "bg-gray-200/50 rounded-sm p-1 border-gray-400 text-gray-800",
+            "A Samsung lançou seu primeiro anel inteligente, o Galaxy Ring, na manhã desta quarta-feira (10) em evento realizado em Paris, na França.",
+        style: "bg-blue-400/50 border-blue-400 text-gray-200",
+    },
+    {
+        title: "Review RTX 4070 ASUS Dual",
+        category: "Analysis",
+        date: "July 4, 2024",
+        author: "img/autor_hardware.jpg",
+        image: "img/placa_video.jpg",
+        description:
+            "Antes bem escasso e mais caro, o segmento de placas de vídeo para rodar games em 1440p ficou recheado nos últimos anos. Com foco em rodar games a uma alta taxa de quadros, a NVIDIA lançou a GeForce RTX 4070 há algum tempo, mas só agora tivemos a oportunidade de enfim testar esse cobiçado modelo.",
+        style: "bg-red-400 border-blue-400 text-gray-200",
+    },
+    {
+        title: "DreamWorks anuncia Shrek 5 para 2026 e confirma elenco",
+        category: "Movie",
+        date: "July 10, 2024",
+        author: "img/autor_bitcoin.jpg",
+        image: "img/movie.jpg",
+        description:
+            "Agora é oficial, foi dada a largada para Shrek 5. Na terça-feira (9), a DreamWorks Animation confirmou que a quinta parcela dos filmes do ogro verde está em desenvolvimento e anunciou seu lançamento nos cinemas",
+        style: "bg-violet-400 border-blue-400 text-gray-200",
     },
 ]);
 </script>
 <template>
-    <CarouselItem
-        v-for="article in articles"
-        class="space-y-2 sm:basis-1/1"
-    >
+    <CarouselItem v-for="article in articles" class="space-y-2 sm:basis-1/1">
         <div class="flex items-center justify-between gap-4">
             <time
                 class="text-xs bg-gray-200/50 rounded-lg p-1 border-gray-400 text-gray-800"
@@ -92,7 +105,6 @@ const articles = ref([
 <style scoped>
 .comment {
     display: -webkit-box;
-    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
