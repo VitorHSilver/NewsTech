@@ -13,9 +13,9 @@ import { Link } from "@inertiajs/vue3";
 
 <template>
     <nav class="flex justify-between backgroundProject">
-        <div class="p-2">
+        <div class="py-2">
             <div>
-                <h1 class="text-5xl font-bold sm:text-5xl titulo">
+                <h1 class="text-5xl font-bold sm:text-5xl titulo pl-6 p-2">
                     TechNews
                 </h1>
             </div>
@@ -43,7 +43,7 @@ import { Link } from "@inertiajs/vue3";
 
 <style scoped>
 nav {
-    padding: 10px;
+    padding: 10px 0;
 }
 .header {
     display: flex;

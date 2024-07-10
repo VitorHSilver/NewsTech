@@ -52,7 +52,7 @@ const articles = ref([
 <template>
     <CarouselItem
         v-for="article in articles"
-        class="space-y-2 sm:basis-1/1 md:basis-1/2 lg:basis-1/3"
+        class="space-y-2 sm:basis-1/1"
     >
         <div class="flex items-center justify-between gap-4">
             <time
@@ -96,8 +96,5 @@ const articles = ref([
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-body {
-    font-family: "Roboto", sans-serif;
 }
 </style>

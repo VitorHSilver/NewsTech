@@ -5,12 +5,13 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
-import NavOption from "./NavigationOptions.vue";
 import Articles from "./Articles.vue";
 </script>
 <template>
-    <NavOption />
-    <div class="p-10">
+    <div>
+        
+    </div>
+    <div class="py-10">
         <Carousel
             class="relative"
             :opts="{
