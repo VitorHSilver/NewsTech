@@ -30,6 +30,8 @@ export default defineComponent({
             postalCode: "",
         });
 
+        const passwordVisible = ref(false);
+
         // handle no Formulario
         const handleSubmit = () => {
             form.post(route("users.store"), {
@@ -78,6 +80,7 @@ export default defineComponent({
             handleSubmit,
             zipCodeFormatting,
             searchCEP,
+            passwordVisible,
         };
     },
 });
@@ -87,12 +90,14 @@ export default defineComponent({
     <SuperiorMenu />
     <!-- Colocar uma condicional no menu -->
     <div
-        class="flex items-center justify-center backgroundProject py-4 sm:py-20 "
+        class="flex items-center justify-center backgroundProject py-4 sm:py-20"
     >
         <form @submit.prevent="handleSubmit">
-            <div class="space-y-12 ">
+            <div class="space-y-12">
                 <div class="border-b border-gray-900/10 pb-4">
-                    <h2 class="text-base font-semibold leading-6 text-zinc-700">
+                    <h2
+                        class="text-base font-semibold leading-6 text-gray-100/50"
+                    >
                         Criação de conta
                     </h2>
                     <div
@@ -119,7 +124,7 @@ export default defineComponent({
                             </span>
                         </div>
 
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-2 relative block w-full">
                             <label
                                 for="password"
                                 class="block text-sm font-medium leading-6 text-zinc-200"
@@ -127,13 +132,23 @@ export default defineComponent({
                             >
                             <div class="mt-2">
                                 <Input
-                                    type="password"
-                                    name="password"
                                     id="password"
+                                    :type="
+                                        passwordVisible ? 'text' : 'password'
+                                    "
                                     class="ring-1 ring-input h-9"
                                     v-model="form.password"
                                 />
                             </div>
+                            <img
+                                :src="
+                                    passwordVisible
+                                        ? 'icon/visibility.svg'
+                                        : 'icon/visibility_off.svg'
+                                "
+                                class="cursor-pointer absolute top-12 right-2 transform -translate-y-1/2"
+                                @click="passwordVisible = !passwordVisible"
+                            />
                             <span class="text-red-500 text-xs">
                                 {{ form.errors.password }}
                             </span>
@@ -297,8 +312,6 @@ export default defineComponent({
                 <Link :href="route('home')">
                     <Button type="button" variant="secondary">Cancelar </Button>
                 </Link>
-
-                <!-- Alterar Link para home usuario -->
                 <Button variant="success" type="submit">Criar</Button>
             </div>
         </form>

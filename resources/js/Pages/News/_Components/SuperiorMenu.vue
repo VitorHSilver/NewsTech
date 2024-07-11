@@ -20,7 +20,7 @@ import { Link } from "@inertiajs/vue3";
                 </h1>
             </div>
         </div>
-        <Menubar class="header bg-#141B37">
+        <Menubar class="header bg-#141B37 border-none">
             <MenubarMenu>
                 <MenubarTrigger
                     class="cursor-pointer menu-mobile"
