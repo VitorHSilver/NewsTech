@@ -54,11 +54,11 @@ export default defineComponent({
 <template>
     <GuestLayout class="backgroundProject">
         <Head title="Login" />
-        <div class="grid grid-cols-2 h-screen gap-10 bg-sky-700 ">
+        <div class="grid grid-cols-2 h-screen gap-10">
             <div class="flex flex-col items-center justify-center">
                 <div>
                     <h1 class="text-7xl text-white font-medium mb-10 ">
-                        Tech News
+                        <Span class="text-sky-700">T</Span>ech <Span class="text-sky-700">N</Span>ews
                     </h1>
                     <h2 class="text-4xl font-light text-white mb-2">
                         Seu canal de noticias
@@ -69,7 +69,7 @@ export default defineComponent({
                 </div>
             </div>
             <div
-            class="flex justify-center items-center backgroundProject relative"
+            class="flex justify-center items-center relative"
             >
             <div
             v-if="status"
@@ -78,7 +78,7 @@ export default defineComponent({
             {{ status }}
         </div>
                 <Link :href="route('home')">
-                    <div class="absolute top-12 left-12">
+                    <div class="absolute top-12 left-54">
                         <div class="flex items-center gap-1">
                             <img src="/icon/seta_home.svg" alt="seta" />
                             <span class="text-gray-100/50 text-sm"
