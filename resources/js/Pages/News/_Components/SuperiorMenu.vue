@@ -15,9 +15,11 @@ import { Link } from "@inertiajs/vue3";
     <nav class="flex justify-between backgroundProject">
         <div class="py-2">
             <div>
-                <h1 class="text-5xl font-bold sm:text-5xl titulo p-2 pl-7">
-                    TechNews
-                </h1>
+                <Link :href="route('home')">
+                    <h1 class="text-5xl font-bold sm:text-5xl titulo p-2 pl-7">
+                        TechNews
+                    </h1>
+                </Link>
             </div>
         </div>
         <Menubar class="header bg-#141B37 border-none">

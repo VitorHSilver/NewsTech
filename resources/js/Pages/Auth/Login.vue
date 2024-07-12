@@ -7,6 +7,7 @@ import Input from "@/components/ui/input/Input.vue";
 import Button from "@/components/ui/button/Button.vue";
 import { Link } from "@inertiajs/vue3";
 import { defineComponent, ref } from "vue";
+import InputError from "@/Components/InputError.vue"
 
 export default defineComponent({
     components: {
@@ -17,6 +18,7 @@ export default defineComponent({
         Input,
         Button,
         Link,
+        InputError,
     },
     props: {
         canResetPassword: {
@@ -47,8 +49,6 @@ export default defineComponent({
         };
     },
 });
-
-
 </script>
 
 <template>
@@ -57,8 +57,8 @@ export default defineComponent({
         <div class="grid grid-cols-2 h-screen gap-10">
             <div class="flex flex-col items-center justify-center">
                 <div>
-                    <h1 class="text-7xl text-white font-medium mb-10 ">
-                        <Span class="text-sky-700">T</Span>ech <Span class="text-sky-700">N</Span>ews
+                    <h1 class="text-7xl text-white font-medium mb-10">
+                        Tech <span class="text-sky-700">N</span>ews
                     </h1>
                     <h2 class="text-4xl font-light text-white mb-2">
                         Seu canal de noticias
@@ -68,15 +68,13 @@ export default defineComponent({
                     </h2>
                 </div>
             </div>
-            <div
-            class="flex justify-center items-center relative"
-            >
-            <div
-            v-if="status"
-            class="mb-4 font-medium text-sm text-green-600"
-            >
-            {{ status }}
-        </div>
+            <div class="flex justify-center items-center relative">
+                <div
+                    v-if="status"
+                    class="mb-4 font-medium text-sm text-green-600"
+                >
+                    {{ status }}
+                </div>
                 <Link :href="route('home')">
                     <div class="absolute top-12 left-54">
                         <div class="flex items-center gap-1">
