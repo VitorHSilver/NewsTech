@@ -7,7 +7,7 @@ import Input from "@/components/ui/input/Input.vue";
 import Button from "@/components/ui/button/Button.vue";
 import { Link } from "@inertiajs/vue3";
 import { defineComponent, ref } from "vue";
-import InputError from "@/Components/InputError.vue"
+import InputError from "@/Components/InputError.vue";
 
 export default defineComponent({
     components: {
@@ -57,7 +57,7 @@ export default defineComponent({
         <div class="grid grid-cols-2 h-screen gap-10">
             <div class="flex flex-col items-center justify-center">
                 <div>
-                    <h1 class="text-7xl text-white font-medium mb-10">
+                    <h1 class="text-8xl text-white font-medium mb-8">
                         Tech <span class="text-sky-700">N</span>ews
                     </h1>
                     <h2 class="text-4xl font-light text-white mb-2">
@@ -69,12 +69,6 @@ export default defineComponent({
                 </div>
             </div>
             <div class="flex justify-center items-center relative">
-                <div
-                    v-if="status"
-                    class="mb-4 font-medium text-sm text-green-600"
-                >
-                    {{ status }}
-                </div>
                 <Link :href="route('home')">
                     <div class="absolute top-12 left-54">
                         <div class="flex items-center gap-1">
@@ -145,7 +139,7 @@ export default defineComponent({
                             />
                         </div>
 
-                        <div class="block mt-4">
+                        <div class="mt-4 flex justify-between">
                             <label class="flex items-center">
                                 <Checkbox
                                     name="remember"
@@ -155,15 +149,22 @@ export default defineComponent({
                                     >Lembrar-se de mim</span
                                 >
                             </label>
-                        </div>
-
-                        <div class="flex items-center justify-end mt-4">
                             <Link
                                 v-if="canResetPassword"
                                 :href="route('password.request')"
                                 class="underline text-sm text-gray-300 hover:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 Esqueceu sua senha?
+                            </Link>
+                        </div>
+
+                        <div class="flex items-center justify-end mt-4">
+                            <Link :href="route('users.index')">
+                                <Button variant="link">
+                                    <span class="text-gray-100 hover:text-gray-400"
+                                        >Criar uma conta</span
+                                    >
+                                </Button>
                             </Link>
 
                             <Button

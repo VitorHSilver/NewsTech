@@ -98,7 +98,7 @@ option {
         <SuperiorMenu />
         <!-- Colocar uma condicional no menu -->
         <div
-            class="flex items-center justify-center backgroundProject py-4 sm:py-20"
+            class="flex items-center justify-center backgroundProject py-4 sm:py-14"
         >
             <form @submit.prevent="handleSubmit">
                 <div class="space-y-12">
