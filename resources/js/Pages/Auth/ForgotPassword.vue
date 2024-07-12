@@ -52,51 +52,54 @@ export default defineComponent({
     <GuestLayout>
         <Head title="Forgot Password" />
         <main class="px-10">
-        <MenuSuperior /> 
-        <div class="flex items-center justify-center ">
-            <div
-                class="flex flex-col bloco bg-sky-900 rounded-xl max-w-xl px-4 py-6 shadow-xl w-full border"
-            >
-                <div class="mb-4 text-sm text-white">
-                    Esqueceu sua senha? Sem problemas. Apenas nos informe seu
-                    endereço de email e enviaremos um link de redefinição de
-                    senha para você escolher uma nova.
-                </div>
-
+            <MenuSuperior />
+            <div class="flex items-center justify-center">
                 <div
-                    v-if="status"
-                    class="mb-4 font-medium text-sm text-green-600"
+                    class="flex flex-col bloco bg-sky-900 rounded-xl max-w-xl px-4 py-6 shadow-xl w-full sm:w-96 border"
                 >
-                    {{ status }}
+                    <div class="mb-4 text-sm text-white">
+                        Esqueceu sua senha? Sem problemas. Apenas nos informe
+                        seu endereço de email e enviaremos um link de
+                        redefinição de senha para você escolher uma nova.
+                    </div>
+
+                    <div
+                        v-if="status"
+                        class="mb-4 font-medium text-sm text-green-600"
+                    >
+                        {{ status }}
+                    </div>
+
+                    <form @submit.prevent="submit">
+                        <div>
+                            <TextInput
+                                id="email"
+                                type="email"
+                                class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                                v-model="form.email"
+                                required
+                                autofocus
+                                autocomplete="username"
+                            />
+
+                            <InputError
+                                class="mt-2"
+                                :message="form.errors.email"
+                            />
+                        </div>
+
+                        <div class="flex items-center justify-end mt-4">
+                            <Button
+                                :class="{ 'opacity-25': form.processing }"
+                                :disabled="form.processing"
+                                variant="info"
+                            >
+                                Redefinir Senha
+                            </Button>
+                        </div>
+                    </form>
                 </div>
-
-                <form @submit.prevent="submit">
-                    <div>
-                        <TextInput
-                            id="email"
-                            type="email"
-                            class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                            v-model="form.email"
-                            required
-                            autofocus
-                            autocomplete="username"
-                        />
-
-                        <InputError class="mt-2" :message="form.errors.email" />
-                    </div>
-
-                    <div class="flex items-center justify-end mt-4">
-                        <Button
-                            :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing"
-                            variant="info"
-                        >
-                            Redefinir Senha
-                        </Button>
-                    </div>
-                </form>
             </div>
-        </div>
-    </main>
+        </main>
     </GuestLayout>
 </template>
