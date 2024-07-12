@@ -7,13 +7,13 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/users', [NewsController::class, 'index'])->name('users.index');
-Route::get('/users/{id}', [NewsController::class, 'show'])->name('users.show');
-Route::get('/users/create', [NewsController::class, 'create'])->name('users.create');
-Route::post('/users', [NewsController::class, 'store'])->name('users.store');
-Route::get('/users/{id}/edit', [NewsController::class, 'edit'])->name('users.edit');
-Route::put('/users/{id}', [NewsController::class, 'update'])->name('users.update');
-Route::delete('/users/{id}', [NewsController::class, 'destroy'])->name('users.destroy');
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
 Route::get('/', [NewsController::class, 'index'])->name('home');
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
