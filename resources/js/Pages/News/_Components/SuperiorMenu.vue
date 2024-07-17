@@ -12,7 +12,7 @@ import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-    <nav class="flex justify-between backgroundProject">
+    <nav class="flex justify-between backgroundProject ">
         <div class="py-2">
             <div>
                 <Link :href="route('home')">

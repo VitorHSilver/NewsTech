@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { CarouselItem } from "@/components/ui/carousel";
 
+
 const articles = ref([
     {
         title: "Maior roubo já feito em bitcoin!",

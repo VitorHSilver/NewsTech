@@ -1,11 +1,12 @@
 <script setup>
+import { cn } from "@/lib/utils";
 import { ref } from "vue";
 
 const tabs = ref([
     {
         name: "Hardware",
         href: "#hardware",
-        style: "hover:text-yellow-500 ",
+        style: "hover:text-yellow-500",
     },
     {
         name: "Games",
@@ -36,12 +37,18 @@ const tabs = ref([
 </script>
 
 <template>
-    <ul class="flex flex-wrap items-center gap-8 pb-4">
-        
+    <ul
+        class="flex self-start top-16 flex-wrap items-center gap-8 pb-4"
+    >
         <li v-for="tab in tabs">
             <a
                 :href="tab.href"
-                :class="['text-gray-100 hover:bg-slate-700/50 text-sm p-2 rounded-xl', tab.style]"
+                :class="
+                    cn(
+                        'text-gray-100 hover:bg-slate-700/50 text-sm p-2 rounded-xl',
+                        tab.style
+                    )
+                "
                 >{{ tab.name }}</a
             >
         </li>
