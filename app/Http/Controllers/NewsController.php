@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
 class NewsController extends Controller
@@ -12,8 +13,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-
-        return Inertia::render('News/Index');
+        $response = Http::get('https://newsapi.org/v2/everything?q=keyword&apiKey=91741c87c30748579e5c1760d57dbfd4');
+        $data = $response->json();
+        return Inertia::render('News/Index', ['articles' => $data['articles']]);
     }
 
     /**

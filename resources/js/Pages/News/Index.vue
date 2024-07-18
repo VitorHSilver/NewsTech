@@ -1,11 +1,10 @@
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import Footer from "./_Components/Footer.vue";
 import Menu from "./_Components/SuperiorMenu.vue";
 import Main from "./_Components/MainComponent.vue";
 import NavOptions from "./_Components/NavigationOptions.vue";
 import ThumbNews from "./_Components/Thumbnails.vue";
-import axios from "axios";
 
 export default defineComponent({
     name: "News",
@@ -33,7 +32,12 @@ export default defineComponent({
             }
         },
     },
-    props: {},
+    props: {
+        articles: {
+            type: Array,
+            required: true,
+        },
+    },
     components: {
         Footer,
         Menu,
@@ -64,12 +68,16 @@ export default defineComponent({
             }
         };
 
-        priceBTC();
+        setInterval(() => {
+            priceBTC();
+        }, 30000);
+        
+        onMounted(() => {
+            priceBTC();
+        });
 
-     
         return {
             fetchCryptoPrices,
-            
         };
     },
 });
@@ -83,7 +91,7 @@ export default defineComponent({
             <div class="col-span-2">
                 <div>
                     <h2 class="pl-9 text-white text-4xl mt-2 mb-2">
-                        Ultimas Noticias
+                        Principais Noticias
                     </h2>
                 </div>
                 <div class="px-6">
@@ -91,40 +99,49 @@ export default defineComponent({
                 </div>
             </div>
             <div class="col-span-2">
-                <p class="text-gray-400 capitalize pb-2">
-                    {{ dateNow }}
-                    <span class="text-white font-semibold pl-2">
-                        {{ greeting }}
-                    </span>
-                </p>
-                <div class="flex gap-4 flex-wrap">
-                    <span class="text-white">
-                        <span class="text-yellow-500">{{
-                            fetchCryptoPrices[0].name
-                        }}</span>
-                        <span class="text-white ml-2">{{
-                            fetchCryptoPrices[0].price_usd
-                        }}</span>
-                    </span>
-                    <span class="text-white">
-                        <span class="text-yellow-500">{{
-                            fetchCryptoPrices[1].name
-                        }}</span>
-                        <span class="text-white ml-2">{{
-                            fetchCryptoPrices[1].price_usd
-                        }}</span>
-                    </span>
-                    <span class="text-white">
-                        <span class="text-yellow-500 ml-2">{{
-                            fetchCryptoPrices[2].name
-                        }}</span>
-                        <span class="text-white ml-2">{{
-                            fetchCryptoPrices[2].price_usd
-                        }}</span>
-                    </span>
+                <div class="flex justify-between items-center">
+                    <p class="text-gray-400 capitalize pb-2">
+                        {{ dateNow }}
+                        <span class="text-white font-semibold p-1">
+                            {{ greeting }}
+                        </span>
+                    </p>
+                    <div
+                        class="flex gap-x-2 flex-wrap justify-end"
+                        v-if="fetchCryptoPrices.length > 0"
+                    >
+                        <p
+                            class="bg-gray-500/50 p-2 flex gap-x-2 flex-wrap rounded-3xl"
+                        >
+                            <span class="text-white">
+                                <span class="text-yellow-500">{{
+                                    fetchCryptoPrices[0].name
+                                }}</span>
+                                <span class="text-white ml-2">{{
+                                    fetchCryptoPrices[0].price_usd
+                                }}</span>
+                            </span>
+                            <span class="text-white">
+                                <span class="text-yellow-500">{{
+                                    fetchCryptoPrices[1].name
+                                }}</span>
+                                <span class="text-white ml-2">{{
+                                    fetchCryptoPrices[1].price_usd
+                                }}</span>
+                            </span>
+                            <span class="text-white">
+                                <span class="text-yellow-500">{{
+                                    fetchCryptoPrices[2].name
+                                }}</span>
+                                <span class="text-white ml-2">{{
+                                    fetchCryptoPrices[2].price_usd
+                                }}</span>
+                            </span>
+                        </p>
+                    </div>
                 </div>
-                <div class="mt-14">
-                    <ThumbNews />
+                <div class="mt-16">
+                    <ThumbNews :articles="articles" />
                 </div>
             </div>
         </div>

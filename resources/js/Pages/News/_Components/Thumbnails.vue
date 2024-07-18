@@ -1,94 +1,107 @@
 <script>
-import axios from "axios";
 import { ref } from "vue";
 
 export default {
     name: "Thumbnails",
     props: {
-        posts: {
+        articles: {
             type: Array,
             required: true,
         },
     },
 
-    setup() {
-        const posts = ref([
-            {
-                title: "Galaxy Ring da Samsung é o anel inteligente mais confortável do mercado",
+    setup({ articles }) {
+        const limit = 3; // Limit the number of articles to show
+
+        // Função para embaralhar um array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Troca de elementos
+            }
+            return array;
+        }
+        // Filtra os artigos para remover os específicos e depois seleciona os 10 primeiros
+        const filteredArticles = articles
+            .filter(
+                (article) =>
+                    article.title !== "Railroading the Pascal Language" &&
+                    article.title !==
+                        "昔のグーグル検索に戻りたい--AI要約や動画のないシンプルな検索結果にする方法" &&
+                    article.description !== "Comments"
+            )
+            .slice(0, 10);
+
+        // Embaralha e pega os 3 primeiros artigos
+        const selectedArticles = shuffleArray(filteredArticles).slice(0, limit);
+
+        const posts = ref(
+            selectedArticles.map((article) => ({
+                title: article.title,
                 category: "Tech",
-                date: "June 29, 2024",
-                author: "img/autor_games.jpg",
-                image: "img/ring.jpg",
-                description:
-                    "A Samsung lançou seu primeiro anel inteligente, o Galaxy Ring, na manhã desta quarta-feira (10) em evento realizado em Paris, na França.",
-            },
-            {
-                title: "Roteadores da ASUS",
-                category: "Hardware",
-                date: "Jun 18, 2024",
-                image: "img/rotedor.jpg",
-                author: "img/autor_hardware.jpg",
-                description:
-                    "Roteador da Asus apresentam problemas de vunerabilidade de segundo especialistas em segurança. A empresa já está ciente do problema e está trabalhando para corrigir o problema.",
-            },
-            {
-                title: "Novo jogo da Ubisoft é anunciado",
-                category: "Games",
-                date: "Jun 15, 2024",
-                image: "img/autor_bitcoin.jpg",
-                author: "img/autor_hardware.jpg",
-                description:
-                    "Ubisoft anuncia novo jogo da franquia Assassin's Creed, o jogo se passará na era medieval e terá um novo protagonista.",
-            },
-        ]);
+                date: new Date(article.publishedAt).toLocaleDateString(
+                    "en-US",
+                    {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                    }
+                ),
+
+                author: article.author,
+                image: article.urlToImage || "img/logo.png",
+                description: article.description,
+                href: article.url,
+                style: "width: 200px; height: 120px;",
+            }))
+        );
+
         return {
             posts,
-            newsAPI,
         };
     },
 };
-const newsAPI = () => {
-    try {
-        axios
-            .get(
-                "https://newsapi.org/v2/everything?q=keyword&apiKey=91741c87c30748579e5c1760d57dbfd4"
-            )
-            .then((response) => {
-                console.log(response);
-            });
-    } catch (error) {
-        console.log(error);
-    }
-};
 </script>
+
 <template>
     <div class="space-y-5 mt-6">
-        <div
-            class="bg-sky-100/10 rounded-lg flex gap-3 p-3"
-            v-for="post in posts"
-        >
-            <div>
+        <h2 class="text-2xl font-semibold text-gray-100">
+            Artigos em destaque
+        </h2>
+        <div class="pl-0 flex items-start" v-for="post in posts">
+            <div class="w-48 h-32 overflow-hidden relative flex-shrink-0">
                 <img
                     :src="post.image"
-                    alt="Imagem do post"
-                    class="size-32 object-cover rounded-md"
+                    alt="img do post"
+                    :style="post.style"
+                    class="object-cover rounded-lg"
                 />
             </div>
-            <div>
-                <h1 class="text-white max-w-lg text-lg font-medium comment">
-                    {{ post.title }}
-                </h1>
-                <p class="text-gray-200 text-sm mt-2 comment">
-                    {{ post.description }}
-                </p>
+            <div class="ml-3 flex flex-col justify-between">
+                <a :href="post.href">
+                    <h1
+                        class="text-white max-w-lg text-xl font-medium truncate-title"
+                    >
+                        {{ post.title }}
+                    </h1>
+                    <p class="text-gray-400 mt-2 text-sm">
+                        {{ post.description }}
+                    </p>
+                </a>
             </div>
+            <p>
+                <span
+                    class="text-gray-400 text-xs w-32 h-32 flex justify-end items-start"
+                >
+                    {{ post.date }}
+                </span>
+            </p>
         </div>
     </div>
 </template>
 <style scoped>
-.comment {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+.truncate-title {
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
