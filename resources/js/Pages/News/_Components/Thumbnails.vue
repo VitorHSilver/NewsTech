@@ -25,7 +25,6 @@ export default {
         const filteredArticles = articles
             .filter(
                 (article) =>
-                    article.title !== "Railroading the Pascal Language" &&
                     article.title !==
                         "昔のグーグル検索に戻りたい--AI要約や動画のないシンプルな検索結果にする方法" &&
                     article.description !== "Comments"

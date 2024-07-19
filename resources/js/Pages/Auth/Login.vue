@@ -161,7 +161,8 @@ export default defineComponent({
                         <div class="flex items-center justify-end mt-4">
                             <Link :href="route('users.index')">
                                 <Button variant="link">
-                                    <span class="text-gray-100 hover:text-gray-400"
+                                    <span
+                                        class="text-gray-100 hover:text-gray-400"
                                         >Criar uma conta</span
                                     >
                                 </Button>

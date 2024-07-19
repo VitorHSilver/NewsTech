@@ -29,7 +29,14 @@ export default defineComponent({
         });
 
         const submit = () => {
-            form.post(route("password.email"));
+            form.post(route("password.email"), {
+                onFinish: () => form.reset("email"),
+                onSuccess: () => {
+                    setTimeout(() => {
+                        window.history.back();
+                    }, 2000);
+                },
+            });
         };
 
         return {
@@ -55,9 +62,9 @@ export default defineComponent({
             <MenuSuperior />
             <div class="flex items-center justify-center">
                 <div
-                    class="flex flex-col bloco bg-sky-900 rounded-xl max-w-xl px-4 py-6 shadow-xl w-full sm:w-96 border"
+                    class="flex flex-col bloco bg-sky-900/10 rounded-xl max-w-xl px-4 py-6 shadow-xl w-full sm:w-96 border"
                 >
-                    <div class="mb-4 text-sm text-white">
+                    <div class="mb-4 text-md text-white">
                         Esqueceu sua senha? Sem problemas. Apenas nos informe
                         seu endereço de email e enviaremos um link de
                         redefinição de senha para você escolher uma nova.

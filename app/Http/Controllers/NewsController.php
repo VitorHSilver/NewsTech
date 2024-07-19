@@ -13,9 +13,25 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $response = Http::get('https://newsapi.org/v2/everything?q=keyword&apiKey=91741c87c30748579e5c1760d57dbfd4');
-        $data = $response->json();
-        return Inertia::render('News/Index', ['articles' => $data['articles']]);
+
+        // $brTech = Http::get('https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=91741c87c30748579e5c1760d57dbfd4')->json()['articles'];
+        // $cripto = Http::get('https://newsapi.org/v2/everything?q=bitcoin&apiKey=91741c87c30748579e5c1760d57dbfd4')->json()['articles'];
+        $data = Http::get('https://newsapi.org/v2/everything?q=keyword&apiKey=91741c87c30748579e5c1760d57dbfd4')->json()['articles'];
+
+        $filteredArticles = array_filter($data, function ($article) {
+            return !empty($article['urlToImage']);
+            // Adicione aqui mais condições de filtragem se necessário
+        });
+
+        // adicionando outros props na index
+        return Inertia::render(
+            'News/Index',
+            [
+                'articles' => array_values($filteredArticles),
+                // 'brTech' => $brTech
+            ]
+
+        );
     }
 
     /**

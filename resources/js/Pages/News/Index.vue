@@ -99,7 +99,7 @@ export default defineComponent({
                 </div>
             </div>
             <div class="col-span-2">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-end">
                     <p class="text-gray-400 capitalize pb-2">
                         {{ dateNow }}
                         <span class="text-white font-semibold p-1">
@@ -107,7 +107,7 @@ export default defineComponent({
                         </span>
                     </p>
                     <div
-                        class="flex gap-x-2 flex-wrap justify-end"
+                        class="flex gap-x-2 flex-wrap justify-start"
                         v-if="fetchCryptoPrices.length > 0"
                     >
                         <p
