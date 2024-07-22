@@ -9,10 +9,18 @@ import {
 } from "@/components/ui/menubar";
 import "@/Pages/Users/Index.vue";
 import { Link } from "@inertiajs/vue3";
+import { ref } from "vue";
+
+const props = defineProps({
+    user: {
+        type: Object,
+        required: true,
+    },
+});
 </script>
 
 <template>
-    <nav class="flex justify-between backgroundProject ">
+    <nav class="flex justify-between backgroundProject">
         <div class="py-2">
             <div>
                 <Link :href="route('home')">
@@ -23,22 +31,36 @@ import { Link } from "@inertiajs/vue3";
             </div>
         </div>
         <Menubar class="header bg-#141B37 border-none">
+            <span v-if="user">{{ user.name }}</span>
+            <span v-else>Realizar Login</span>
             <MenubarMenu>
-                <MenubarTrigger
-                    class="cursor-pointer menu-mobile"
-                ></MenubarTrigger>
+                <MenubarTrigger ref="menuTrigger" class="cursor-pointer menu-mobile"></MenubarTrigger>
                 <MenubarContent>
-                    <MenubarItem>
+                    <MenubarItem v-if="!user">
                         <Link :href="route('login')">Login</Link>
                     </MenubarItem>
+                    <MenubarItem v-else>
+                        <Link :href="route('users.edit', user.id)">Editar conta</Link>
+                    </MenubarItem>
                     <MenubarSeparator />
-                    <MenubarItem>
+                    <MenubarItem v-if="!user">
                         <Link :href="route('users.index')">Criar conta</Link>
                     </MenubarItem>
                     <MenubarSeparator />
-                    <MenubarItem>Publique sua notícia</MenubarItem>
+                    <MenubarItem v-if="!user">
+                        <Link :href="route('login')">Publique sua notícia</Link>
+                    </MenubarItem>
+                    <MenubarItem v-else>
+                        <Link :href="route('users.edit', user.id)"
+                            >Publique sua notícia
+                        </Link>
+                    </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem>Quem Somos</MenubarItem>
+                    <MenubarSeparator />
+                    <MenubarItem v-if="user">
+                        <Link :href="route('users.logoff')">Sair</Link>
+                    </MenubarItem>
                 </MenubarContent>
             </MenubarMenu>
         </Menubar>

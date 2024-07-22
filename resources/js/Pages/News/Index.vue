@@ -5,6 +5,7 @@ import Menu from "./_Components/SuperiorMenu.vue";
 import Main from "./_Components/MainComponent.vue";
 import NavOptions from "./_Components/NavigationOptions.vue";
 import ThumbNews from "./_Components/Thumbnails.vue";
+import { Head } from "@inertiajs/vue3";
 
 export default defineComponent({
     name: "News",
@@ -37,6 +38,10 @@ export default defineComponent({
             type: Array,
             required: true,
         },
+        user: {
+            type: Object,
+            required: true,
+        },
     },
     components: {
         Footer,
@@ -44,6 +49,7 @@ export default defineComponent({
         Main,
         NavOptions,
         ThumbNews,
+        Head,
     },
     setup() {
         const fetchCryptoPrices = ref([]);
@@ -71,7 +77,7 @@ export default defineComponent({
         setInterval(() => {
             priceBTC();
         }, 30000);
-        
+
         onMounted(() => {
             priceBTC();
         });
@@ -84,8 +90,9 @@ export default defineComponent({
 </script>
 
 <template>
+    <Head title="Home Page" />
     <main class="px-10">
-        <Menu />
+        <Menu :user="user" />
         <NavOptions class="pl-8" />
         <div class="grid grid-cols-4 mt-2 gap-14">
             <div class="col-span-2">
@@ -102,7 +109,7 @@ export default defineComponent({
                 <div class="flex justify-between items-end">
                     <p class="text-gray-400 capitalize pb-2">
                         {{ dateNow }}
-                        <span class="text-white font-semibold p-1">
+                        <span class="text-white font-semibold">
                             {{ greeting }}
                         </span>
                     </p>

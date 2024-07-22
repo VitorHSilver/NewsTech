@@ -1,8 +1,14 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { CarouselItem } from "@/components/ui/carousel";
 
-
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 const articles = ref([
     {
         title: "Maior roubo já feito em bitcoin!",
@@ -65,9 +71,13 @@ const articles = ref([
         style: "bg-violet-400 border-blue-400 text-gray-200",
     },
 ]);
+const shuffledArticles = computed(() => shuffleArray([...articles.value]));
 </script>
 <template>
-    <CarouselItem v-for="article in articles" class="space-y-2 sm:basis-1/1">
+    <CarouselItem
+        v-for="article in shuffledArticles"
+        class="space-y-2 sm:basis-1/1"
+    >
         <div class="flex items-center justify-between gap-4">
             <time
                 class="text-xs bg-gray-200/50 rounded-lg p-1 border-gray-400 text-gray-800"

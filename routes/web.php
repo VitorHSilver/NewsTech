@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -15,6 +16,9 @@ Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edi
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
+Route::get('logoff', [AuthenticatedSessionController::class, 'destroy'])->name('users.logoff');
+
+
 Route::get('/', [NewsController::class, 'index'])->name('home');
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
@@ -23,7 +27,6 @@ Route::post('/news', [NewsController::class, 'store'])->name('news.store');
 Route::get('/news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
 Route::put('/news/{id}', [NewsController::class, 'update'])->name('news.update');
 Route::delete('/news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
-
 
 
 require __DIR__ . '/auth.php';

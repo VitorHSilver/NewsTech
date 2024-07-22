@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 
@@ -22,11 +23,11 @@ class NewsController extends Controller
             return !empty($article['urlToImage']);
             // Adicione aqui mais condições de filtragem se necessário
         });
-
         // adicionando outros props na index
         return Inertia::render(
             'News/Index',
             [
+                'user' => Auth::user() ?? null,
                 'articles' => array_values($filteredArticles),
                 // 'brTech' => $brTech
             ]
