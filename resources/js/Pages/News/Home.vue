@@ -109,7 +109,7 @@ export default defineComponent({
                 <div class="flex justify-between items-end">
                     <p class="text-gray-400 capitalize pb-2">
                         {{ dateNow }}
-                        <span class="text-white font-semibold">
+                        <span class="text-white font-semibold pl-1">
                             {{ greeting }}
                         </span>
                     </p>

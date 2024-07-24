@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -70,7 +71,6 @@ class UserController extends Controller
 
         // Criação do usuário
         try {
-
             $user = User::create([
                 'name' => strtolower($data['name']),
                 'password' => bcrypt($data['password']),
@@ -82,6 +82,7 @@ class UserController extends Controller
                 'city' => strtolower($data['city']),
                 'region' => strtolower($data['region']),
             ]);
+
             $user->save();
         } catch (\Throwable $th) {
             if (env('APP_DEBUG')) {
@@ -99,7 +100,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user = User::find($user->id);
+        $user = Auth::user($user->id);
 
         return Inertia::render('Users/Show', [
             'user' => $user,

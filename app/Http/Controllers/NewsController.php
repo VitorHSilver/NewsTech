@@ -25,7 +25,7 @@ class NewsController extends Controller
         });
         // adicionando outros props na index
         return Inertia::render(
-            'News/Index',
+            'News/Home',
             [
                 'user' => Auth::user() ?? null,
                 'articles' => array_values($filteredArticles),

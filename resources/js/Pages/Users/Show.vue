@@ -1,9 +1,7 @@
 <script>
-import Button from "@/components/ui/button/Button.vue";
-import { router, useForm, Link } from "@inertiajs/vue3";
 import { defineComponent, ref } from "vue";
-import { Input } from "@/components/ui/input";
-import axios from "axios";
+import { Head } from "@inertiajs/vue3";
+import SuperiorMenu from "../News/_Components/SuperiorMenu.vue";
 
 export default defineComponent({
     name: "Users",
@@ -14,73 +12,49 @@ export default defineComponent({
         },
     },
     components: {
-        Button,
-        Input,
-        Link,
+        Head,
+        SuperiorMenu,
     },
     setup() {
-        const form = useForm({
-            name: "",
-            password: "",
-            email: "",
-            country: "",
-            streetAddress: "",
-            neighborhood: "",
-            city: "",
-            region: "",
-            postalCode: "",
-        });
-
-        const handleSubmit = () => {
-            form.post(route("users.store"), {
-                onSuccess: () => {
-                    console.log("success");
-                },
-                onError: (error) => {
-                    console.log("error on submit");
-                    console.log("Erro:", TypeError, error);
-                },
-                onFinish: () => {},
-            });
-        };
-
-        const zipCodeFormatting = (event) => {
-            let value = event.target.value.replace(/\D/g, "");
-
-            if (value.length > 5) {
-                value = value.slice(0, 5) + "-" + value.slice(5);
-            }
-            form.postalCode = value;
-            searchCEP(value);
-        };
-
-        const searchCEP = (valueCEP) => {
-            axios
-                .get(`https://viacep.com.br/ws/${valueCEP}/json/`)
-                .then((response) => {
-                    form.neighborhood = response.data.bairro;
-                    form.city = response.data.localidade;
-                    form.region = response.data.uf;
-                    form.country = "Brazil";
-                    form.streetAddress = response.data.logradouro;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        };
-
-        return {
-            form,
-            handleSubmit,
-            zipCodeFormatting,
-            searchCEP,
-        };
+        return {};
     },
 });
 </script>
 
 <template>
-    
-    <h1>{{ user.name }}</h1>
-    <p>{{ user.email }}</p>
+    <Head title="Profile"></Head>
+    <SuperiorMenu :user="user" :showUserName="false"></SuperiorMenu>
+    <main class="px-10">
+        <div class="flex justify-center mt-24">
+            <div>
+                <h1 class="text-gray-100 text-5xl font-regular uppercase">
+                    {{ user.name }}
+                </h1>
+                <p class="pl-1 text-md text-gray-600 capitalize">
+                    <span v-if="user.city">{{ user.city }},</span>
+                    <span v-else>Cidade não informada</span>
+                    <span class="p-1" v-if="user.country">{{
+                        user.country
+                    }}</span>
+                    <span v-else>País não informado</span>
+                </p>
+                <div v-if="user" class="text-white"></div>
+
+                <div v-else class="text-white text-center">
+                    <p>Usuário não encontrado.</p>
+                </div>
+                <div class="flex gap-2 mt-16">
+                    <div>
+                        <h1>botao</h1>
+                    </div>
+                    <div>
+                        <h1>botao2</h1>
+                    </div>
+                    <div>
+                        <h1>botao3</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </template>

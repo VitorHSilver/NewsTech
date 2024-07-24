@@ -16,6 +16,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    showUserName: {
+        type: Boolean,
+        default: true,
+    },
 });
 </script>
 
@@ -31,16 +35,20 @@ const props = defineProps({
             </div>
         </div>
         <Menubar class="header bg-#141B37 border-none">
-            <span v-if="user">{{ user.name }}</span>
-            <span v-else>Realizar Login</span>
+            <span v-if="user && showUserName">{{ user.name }}</span>
             <MenubarMenu>
-                <MenubarTrigger ref="menuTrigger" class="cursor-pointer menu-mobile"></MenubarTrigger>
+                <MenubarTrigger
+                    ref="menuTrigger"
+                    class="cursor-pointer menu-mobile"
+                ></MenubarTrigger>
                 <MenubarContent>
                     <MenubarItem v-if="!user">
                         <Link :href="route('login')">Login</Link>
                     </MenubarItem>
                     <MenubarItem v-else>
-                        <Link :href="route('users.edit', user.id)">Editar conta</Link>
+                        <Link :href="route('users.show', user.id)"
+                            >Meu perfil</Link
+                        >
                     </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem v-if="!user">
@@ -51,7 +59,7 @@ const props = defineProps({
                         <Link :href="route('login')">Publique sua notícia</Link>
                     </MenubarItem>
                     <MenubarItem v-else>
-                        <Link :href="route('users.edit', user.id)"
+                        <Link :href="route('users.show', user.id)"
                             >Publique sua notícia
                         </Link>
                     </MenubarItem>
