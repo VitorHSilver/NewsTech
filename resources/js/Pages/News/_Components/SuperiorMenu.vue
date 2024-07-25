@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/menubar";
 import "@/Pages/Users/Index.vue";
 import { Link } from "@inertiajs/vue3";
-import { ref } from "vue";
 
 const props = defineProps({
     user: {
@@ -19,6 +18,9 @@ const props = defineProps({
     showUserName: {
         type: Boolean,
         default: true,
+    },
+    urlAtual: {
+        type: String,
     },
 });
 </script>
@@ -51,7 +53,7 @@ const props = defineProps({
                         >
                     </MenubarItem>
                     <MenubarSeparator />
-                    <MenubarItem v-if="!user">
+                    <MenubarItem v-if="!user && urlAtual !== '/users'">
                         <Link :href="route('users.index')">Criar conta</Link>
                     </MenubarItem>
                     <MenubarSeparator />

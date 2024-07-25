@@ -6,6 +6,7 @@ import { defineComponent, ref } from "vue";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import InputError from "@/Components/InputError.vue";
+import { usePage } from "@inertiajs/vue3";
 
 export default defineComponent({
     name: "Users",
@@ -32,6 +33,11 @@ export default defineComponent({
             postalCode: "",
         });
 
+        // Pegando a URL atual
+        const { url } = usePage();
+        const urlAtual = url;
+
+        // Variável para mostrar ou não a senha
         const passwordVisible = ref(false);
 
         // handle no Formulario
@@ -83,6 +89,7 @@ export default defineComponent({
             zipCodeFormatting,
             searchCEP,
             passwordVisible,
+            urlAtual,
         };
     },
 });
@@ -95,8 +102,7 @@ option {
 </style>
 <template>
     <main class="px-10">
-        <SuperiorMenu />
-        <!-- Colocar uma condicional no menu -->
+        <SuperiorMenu :url-atual="urlAtual" />
         <div
             class="flex items-center justify-center backgroundProject py-4 sm:py-14"
         >
@@ -123,7 +129,7 @@ option {
                                         name="name"
                                         id="first-name"
                                         autocomplete="given-name"
-                                        class="h-9 capitalize border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 capitalize bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.name"
                                     />
                                 </div>
@@ -146,7 +152,7 @@ option {
                                                 ? 'text'
                                                 : 'password'
                                         "
-                                        class="h-9 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.password"
                                     />
                                 </div>
@@ -177,7 +183,7 @@ option {
                                         type="email"
                                         autocomplete="email"
                                         placeholder="email@email.com"
-                                        class="h-9 lowercase border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 lowercase bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.email"
                                     />
                                 </div>
@@ -198,7 +204,7 @@ option {
                                         type="text"
                                         name="postal-code"
                                         id="postal-code"
-                                        class="h-9 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.postalCode"
                                         placeholder="00000-000"
                                         @input="zipCodeFormatting"
@@ -222,7 +228,7 @@ option {
                                         name="street-address"
                                         id="street-address"
                                         autocomplete="street-address"
-                                        class="h-9 capitalize border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 capitalize bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.streetAddress"
                                     />
                                 </div>
@@ -241,7 +247,7 @@ option {
                                         id="country"
                                         name="country"
                                         autocomplete="country-name"
-                                        class="block w-full rounded-md border-0 py-2 text-black shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:max-w-[200px] sm:text-sm sm:leading-6 p-2"
+                                        class="w-full bg-transparent rounded-md border-0 py-2 text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:max-w-[200px] sm:text-sm sm:leading-6 p-2"
                                         v-model="form.country"
                                     >
                                         <option>Brazil</option>
@@ -266,7 +272,7 @@ option {
                                         name="neighborhood"
                                         id="neighborhood"
                                         autocomplete="address-level3"
-                                        class="h-9 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.neighborhood"
                                     />
                                 </div>
@@ -287,7 +293,7 @@ option {
                                         name="city"
                                         id="city"
                                         autocomplete="address-level2"
-                                        class="h-9 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.city"
                                     />
                                 </div>
@@ -307,7 +313,7 @@ option {
                                         name="region"
                                         id="region"
                                         autocomplete="address-level1"
-                                        class="h-9 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.region"
                                     />
                                 </div>
