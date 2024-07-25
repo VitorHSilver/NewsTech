@@ -10,6 +10,7 @@ class News extends Model
         'title',
         'description',
         'image',
+        'source_url',
     ];
 
 

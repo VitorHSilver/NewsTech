@@ -34,6 +34,15 @@
     --ring: 224 71.4% 4.1%;
  
     --radius: 0.5rem;
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s; 
+        -webkit-text-fill-color: #ffffff !important; /* Cor do texto */
+        background-color: transparent !important; /* Define o fundo como transparente */
+    }
   }
  
   .dark {
@@ -65,6 +74,7 @@
     --destructive-foreground: 210 20% 98%;
  
     --ring: 216 12.2% 83.9%;
+    
   }
 }
  

@@ -88,7 +88,7 @@ export default defineComponent({
                             <Input
                                 id="email"
                                 type="email"
-                                class="mt-1 block w-full bg-transparent border-gray-100 placeholder:text-slate-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-gray-200"
+                                class="mt-1 block w-full bg-transparent focus:bg-transparent border-gray-100 placeholder:text-slate-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-gray-200"
                                 v-model="form.email"
                                 placeholder="Email"
                                 required
@@ -111,7 +111,7 @@ export default defineComponent({
                                     :type="
                                         passwordVisible ? 'text' : 'password'
                                     "
-                                    class="mt-1 block w-full bg-transparent border-gray-100 placeholder:text-slate-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-gray-200"
+                                    class="mt-1 block w-full bg-transparent focus:bg-transparent border-gray-100 placeholder:text-slate-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-gray-200"
                                     placeholder="Senha"
                                     v-model="form.password"
                                     required
