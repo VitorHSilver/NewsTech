@@ -2,6 +2,7 @@
 **Meu projeto utilizando `VUE3` e `Laravel 11`**
 Nele estou colocando em pratica os meu conhecimentos adquiridos no dia a dia.
 
+![Print](assets/home.png)
 ![Print](assets/login.png)
 ![Print](assets/create_user.png)
 
