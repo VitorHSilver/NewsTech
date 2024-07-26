@@ -43,15 +43,21 @@ export default defineComponent({
                 <div v-else class="text-white text-center">
                     <p>Usuário não encontrado.</p>
                 </div>
-                <div class="flex gap-2 mt-16">
-                    <div>
-                        <h1>botao</h1>
+                <div class="flex justify-around gap-x-6 mt-16 text-gray-200">
+                    <div class="p-2 px-6 bg-emerald-700 text-white rounded-lg">
+                        <a :href="route('users.edit', user.id)">
+                            <h1>Editar</h1>
+                        </a>
                     </div>
-                    <div>
-                        <h1>botao2</h1>
+                    <div class="p-2 px-6 bg-blue-500 text-white rounded-lg">
+                        <a :href="route('news.create')">
+                            <h1>Publicar nova notícia</h1>
+                        </a>
                     </div>
-                    <div>
-                        <h1>botao3</h1>
+                    <div class="p-2 px-6 bg-red-500 text-white rounded-lg">
+                        <a :href="route('users.destroy', user.id)">
+                            <h1>Excluir Conta</h1>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -26,6 +26,7 @@ class User extends Authenticatable
         'neighborhood',
         'city',
         'region',
+        'roles',
     ];
 
     /**
@@ -55,5 +56,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(News::class);
     }
-    
 }

@@ -119,7 +119,7 @@ option {
                         >
                             <div class="sm:col-span-4">
                                 <label
-                                    for="first-name"
+                                    for="name"
                                     class="block text-sm font-medium leading-6 text-zinc-200"
                                     >Nome</label
                                 >
@@ -127,7 +127,7 @@ option {
                                     <Input
                                         type="text"
                                         name="name"
-                                        id="first-name"
+                                        id="name"
                                         autocomplete="given-name"
                                         class="h-9 capitalize bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.name"
@@ -152,7 +152,7 @@ option {
                                                 ? 'text'
                                                 : 'password'
                                         "
-                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.password"
                                     />
                                 </div>
@@ -183,7 +183,7 @@ option {
                                         type="email"
                                         autocomplete="email"
                                         placeholder="email@email.com"
-                                        class="h-9 lowercase bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 lowercase bg-transparent text-gray-200 border-gray-100 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.email"
                                     />
                                 </div>
@@ -204,7 +204,7 @@ option {
                                         type="text"
                                         name="postal-code"
                                         id="postal-code"
-                                        class="h-9 bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 bg-transparent text-gray-200 border-gray-100 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.postalCode"
                                         placeholder="00000-000"
                                         @input="zipCodeFormatting"
@@ -228,7 +228,7 @@ option {
                                         name="street-address"
                                         id="street-address"
                                         autocomplete="street-address"
-                                        class="h-9 capitalize bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 capitalize bg-transparent text-gray-200 border-gray-100 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.streetAddress"
                                     />
                                 </div>
@@ -247,7 +247,7 @@ option {
                                         id="country"
                                         name="country"
                                         autocomplete="country-name"
-                                        class="w-full bg-transparent rounded-md border-0 py-2 text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:max-w-[200px] sm:text-sm sm:leading-6 p-2"
+                                        class="w-full bg-transparent rounded-md border-0 py-2 text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:max-w-[200px] sm:text-sm sm:leading-6 p-2"
                                         v-model="form.country"
                                     >
                                         <option>Brazil</option>
@@ -272,7 +272,7 @@ option {
                                         name="neighborhood"
                                         id="neighborhood"
                                         autocomplete="address-level3"
-                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.neighborhood"
                                     />
                                 </div>
@@ -293,7 +293,7 @@ option {
                                         name="city"
                                         id="city"
                                         autocomplete="address-level2"
-                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.city"
                                     />
                                 </div>
@@ -313,7 +313,7 @@ option {
                                         name="region"
                                         id="region"
                                         autocomplete="address-level1"
-                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.region"
                                     />
                                 </div>
