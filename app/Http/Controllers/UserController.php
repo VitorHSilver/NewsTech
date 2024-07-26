@@ -98,13 +98,17 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show()
     {
-        $user = Auth::user($user->id);
+        $user = Auth::user();
 
-        return Inertia::render('Users/Show', [
-            'user' => $user,
-        ]);
+        try {
+            return Inertia::render('Users/Show', [
+                'user' => $user,
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->route('home')->with('error', 'Usuário não encontrado.');
+        }
     }
 
     /**
@@ -128,5 +132,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        dd($id, 'destroy');
     }
 }
