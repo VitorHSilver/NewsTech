@@ -116,7 +116,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        dd('Controller edit com id:' . $id);
     }
 
     /**
@@ -130,8 +130,16 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        dd($id, 'destroy');
+        try {
+            $user = User::findOrfail($id);
+            $user->delete();
+            return redirect()->route('home')->with('success', 'Usuário deletado com sucesso.');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return redirect()->route('home')->with('error', 'Usuário não encontrado.');
+        } catch (\Throwable $th) {
+            return redirect()->route('home')->with('error', 'Erro ao deletar usuário.');
+        }
     }
 }

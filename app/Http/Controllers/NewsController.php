@@ -40,7 +40,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        dd('create new news');
     }
 
     /**
@@ -48,7 +48,6 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -56,7 +55,7 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        dd('show news');
     }
 
     /**

@@ -111,7 +111,7 @@ export default defineComponent({
                                     :type="
                                         passwordVisible ? 'text' : 'password'
                                     "
-                                    class="mt-1 block w-full bg-transparent focus:bg-transparent border-gray-100 placeholder:text-slate-100  focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-gray-200"
+                                    class="mt-1 block w-full bg-transparent focus:bg-transparent border-gray-100 placeholder:text-slate-100 focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-gray-200"
                                     placeholder="Senha"
                                     v-model="form.password"
                                     required
@@ -160,12 +160,9 @@ export default defineComponent({
 
                         <div class="flex items-center justify-end mt-4">
                             <Link :href="route('users.index')">
-                                <Button variant="link">
-                                    <span
-                                        class="text-gray-100 hover:text-gray-400"
-                                        >Criar uma conta</span
-                                    >
-                                </Button>
+                                <span class="text-gray-100 hover:text-gray-400"
+                                    >Criar uma conta</span
+                                >
                             </Link>
 
                             <Button
@@ -173,6 +170,7 @@ export default defineComponent({
                                 :class="{ 'opacity-25': form.processing }"
                                 :disabled="form.processing"
                                 variant="info"
+                                type="submit"
                             >
                                 Logar
                             </Button>

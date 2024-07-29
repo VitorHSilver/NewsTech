@@ -49,10 +49,14 @@ export default defineComponent({
     <main class="px-10">
         <div class="flex justify-center mt-20">
             <div>
-                <h1 class="text-gray-100 text-center text-5xl font-regular uppercase">
+                <h1
+                    class="text-gray-100 text-center text-5xl font-regular uppercase"
+                >
                     {{ user.name }}
                 </h1>
-                <p class="pl-1 text-md text-center text-gray-600 capitalize mt-2">
+                <p
+                    class="pl-1 text-md text-center text-gray-600 capitalize mt-2"
+                >
                     <span v-if="user.city">{{ user.city }},</span>
                     <span v-else>Cidade não informada</span>
                     <span class="p-1" v-if="user.country">{{
@@ -109,8 +113,6 @@ export default defineComponent({
                                             :action="
                                                 route('users.destroy', user.id)
                                             "
-                                            method="POST"
-                                            value="DELETE"
                                         >
                                             <Button
                                                 type="submit"
