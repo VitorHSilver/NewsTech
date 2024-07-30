@@ -135,11 +135,11 @@ class UserController extends Controller
         try {
             $user = User::findOrfail($id);
             $user->delete();
-            return redirect()->route('home')->with('success', 'Usuário deletado com sucesso.');
+            return redirect()->back()->with('toast', ['severity' => 'info', 'message' => 'Usuário deletado com sucesso.']);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return redirect()->route('home')->with('error', 'Usuário não encontrado.');
+            return redirect()->route('home')->with('toast', ['severity' => 'error', 'message' => 'Usuário não encontrado.']);
         } catch (\Throwable $th) {
-            return redirect()->route('home')->with('error', 'Erro ao deletar usuário.');
+            return redirect()->back()->with('toast', ['severity' => 'error', 'message' => 'Erro ao deletar usuário.']);
         }
     }
 }

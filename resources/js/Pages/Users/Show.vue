@@ -1,6 +1,6 @@
 <script>
-import { defineComponent, ref } from "vue";
-import { Head } from "@inertiajs/vue3";
+import { defineComponent, ref, computed, watch, onMounted } from "vue";
+import { Head, usePage } from "@inertiajs/vue3";
 import SuperiorMenu from "../News/_Components/SuperiorMenu.vue";
 import {
     AlertDialog,
@@ -14,6 +14,8 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import Button from "@/components/ui/button/Button.vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 export default defineComponent({
     name: "Users",
@@ -38,7 +40,27 @@ export default defineComponent({
         AlertDialogTrigger,
     },
     setup() {
-        return {};
+        const toastMessage = computed(() => {
+            return usePage().props.flash.toast;
+        });
+
+        onMounted(() => {
+            const toastMessage = usePage().props.flash.toast;
+
+            if (toastMessage) {
+                const { severity, message } = toastMessage;
+                if (severity === "success") {
+                    toast.success(message);
+                } else if (severity === "error") {
+                    toast.error(message);
+                } else {
+                    toast.info(message);
+                }
+            }
+        });
+        return {
+            toastMessage,
+        };
     },
 });
 </script>
@@ -70,7 +92,7 @@ export default defineComponent({
                     <p>Usuário não encontrado.</p>
                 </div>
                 <div
-                    class="flex justify-center gap-x-8 mt-8 text-gray-200 px-8"
+                    class="flex justify-center gap-x-8 mt-8 text-gray-200 px-8 flex-wrap gap-y-4"
                 >
                     <div>
                         <a :href="route('users.edit', user.id)">
@@ -128,6 +150,19 @@ export default defineComponent({
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="relative mt-44 border-t border-gray-100 flex gap-2">
+            <button
+                class="absolute -top-12 ml-4 p-1 mt-2 bg-gray-100 rounded-lg"
+            >
+                News
+            </button>
+            <button
+                class="absolute -top-12 left-16 ml-4 p-1 mt-2 bg-gray-100 rounded-lg"
+            >
+                Comments
+            </button>
         </div>
     </main>
 </template>

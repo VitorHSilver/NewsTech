@@ -55,7 +55,7 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        dd('show news');
+        
     }
 
     /**
