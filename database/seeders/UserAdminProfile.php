@@ -15,15 +15,15 @@ class UserAdminProfile extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'name' => 'Admin',
+            'name' => 'admin',
             'email' => 'vitor.adm@teste.com',
-            'password' => Hash::make('123456'),
-            'country' => 'Brasil',
-            'streetAddress' => 'Rua Teste',
+            'password' => Hash::make('1234'),
+            'country' => strtolower('Brasil'),
+            'streetAddress' => 'rua teste',
             'postalCode' => '12345678',
-            'neighborhood' => 'Bairro Teste',
-            'city' => 'Cidade Teste',
-            'region' => 'Região Teste',
+            'neighborhood' => 'vila alzira',
+            'city' => 'cidade admin',
+            'region' => 'regiao teste',
             'roles' => 'admin'
         ]);
     }

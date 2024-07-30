@@ -1,14 +1,16 @@
 <script>
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, ref, watch, computed } from "vue";
 import Footer from "./_Components/Footer.vue";
 import Menu from "./_Components/SuperiorMenu.vue";
 import Main from "./_Components/MainComponent.vue";
 import NavOptions from "./_Components/NavigationOptions.vue";
 import ThumbNews from "./_Components/Thumbnails.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, usePage } from "@inertiajs/vue3";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 export default defineComponent({
-    name: "News",
+    name: "Home",
     data() {
         return {
             dateNow: new Date()
@@ -78,12 +80,29 @@ export default defineComponent({
             priceBTC();
         }, 30000);
 
+        const toastMessage = computed(() => {
+            return usePage().props.flash.toast;
+        });
+
         onMounted(() => {
             priceBTC();
+            const toastMessage = usePage().props.flash.toast;
+
+            if (toastMessage) {
+                const { severity, message } = toastMessage;
+                if (severity === "success") {
+                    toast.success(message);
+                } else if (severity === "error") {
+                    toast.error(message);
+                } else {
+                    toast.info(message);
+                }
+            }
         });
 
         return {
             fetchCryptoPrices,
+            toastMessage,
         };
     },
 });

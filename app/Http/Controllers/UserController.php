@@ -98,13 +98,17 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show()
     {
-        $user = Auth::user($user->id);
+        $user = Auth::user();
 
-        return Inertia::render('Users/Show', [
-            'user' => $user,
-        ]);
+        try {
+            return Inertia::render('Users/Show', [
+                'user' => $user,
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->route('home')->with('error', 'Usuário não encontrado.');
+        }
     }
 
     /**
@@ -112,7 +116,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        dd('Controller edit com id:' . $id);
     }
 
     /**
@@ -126,7 +130,16 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
+        try {
+            $user = User::findOrfail($id);
+            $user->delete();
+            return redirect()->back()->with('toast', ['severity' => 'info', 'message' => 'Usuário deletado com sucesso.']);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return redirect()->route('home')->with('toast', ['severity' => 'error', 'message' => 'Usuário não encontrado.']);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('toast', ['severity' => 'error', 'message' => 'Erro ao deletar usuário.']);
+        }
     }
 }
