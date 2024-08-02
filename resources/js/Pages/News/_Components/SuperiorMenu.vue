@@ -36,40 +36,100 @@ const props = defineProps({
                 </Link>
             </div>
         </div>
-        <Menubar class="header bg-#141B37 border-none">
+        <Menubar class="header bg-#141B37 border-none mt-4">
             <span v-if="user && showUserName">{{ user.name }}</span>
             <MenubarMenu>
                 <MenubarTrigger
                     ref="menuTrigger"
                     class="cursor-pointer menu-mobile"
                 ></MenubarTrigger>
-                <MenubarContent>
+                <MenubarContent class="mr-2 bg-gray-50">
                     <MenubarItem v-if="!user">
-                        <Link :href="route('login')">Login</Link>
+                        <Link
+                            :href="route('login')"
+                            class="flex items-center font-medium text-gray-600 relative"
+                            >Login
+                            <span
+                                class="material-symbols-outlined text-gray-600 px-1 absolute left-36"
+                            >
+                                person
+                            </span></Link
+                        >
                     </MenubarItem>
                     <MenubarItem v-else>
-                        <Link :href="route('users.show', user.id)"
-                            >Meu perfil</Link
+                        <Link
+                            :href="route('users.show', user.id)"
+                            class="flex items-center font-medium text-gray-600 relative"
+                            ><span>Meu perfil</span
+                            ><span
+                                class="material-symbols-outlined text-gray-600 px-2 absolute left-36"
+                            >
+                                manage_accounts
+                            </span></Link
                         >
                     </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem v-if="!user && urlAtual !== '/users'">
-                        <Link :href="route('users.index')">Criar conta</Link>
+                        <Link
+                            :href="route('users.index')"
+                            class="flex items-center font-medium text-gray-600 relative"
+                            >Criar conta
+                            <span
+                                class="material-symbols-outlined px-2 text-gray-600 absolute left-36"
+                            >
+                                person_add
+                            </span></Link
+                        >
                     </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem v-if="!user">
-                        <Link :href="route('login')">Publique sua notícia</Link>
+                        <Link
+                            :href="route('login')"
+                            class="flex items-center font-medium text-gray-600 relative"
+                            >Publique sua notícia
+                            <span
+                                class="material-symbols-outlined px-2 text-gray-600 absolute left-36"
+                            >
+                                contextual_token_add
+                            </span></Link
+                        >
                     </MenubarItem>
                     <MenubarItem v-else>
-                        <Link :href="route('users.show', user.id)"
+                        <Link
+                            :href="route('news.create')"
+                            class="flex items-center font-medium text-gray-600 relative"
                             >Publique sua notícia
+                            <span
+                                class="material-symbols-outlined px-2 text-gray-600 absolute left-36"
+                            >
+                                contextual_token_add
+                            </span>
                         </Link>
                     </MenubarItem>
                     <MenubarSeparator />
-                    <MenubarItem>Quem Somos</MenubarItem>
+                    <MenubarItem>
+                        <Link
+                            :href="route('about-us')"
+                            class="flex items-center font-medium text-gray-600 hover:text-gray-800 relative"
+                            >Quem Somos
+                            <span
+                                class="material-symbols-outlined px-2 text-gray-600 absolute left-36"
+                            >
+                                groups
+                            </span></Link
+                        >
+                    </MenubarItem>
                     <MenubarSeparator />
                     <MenubarItem v-if="user">
-                        <Link :href="route('users.logoff')">Sair</Link>
+                        <Link
+                            :href="route('users.logoff')"
+                            class="flex relative items-center font-medium text-gray-600"
+                            >Sair<span
+                                class="material-symbols-outlined px-2 text-gray-600 absolute left-36"
+                            >
+                                logout
+                            </span></Link
+                        >
                     </MenubarItem>
                 </MenubarContent>
             </MenubarMenu>

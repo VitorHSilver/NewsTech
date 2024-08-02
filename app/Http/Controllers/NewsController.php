@@ -40,7 +40,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        dd('create new news');
+        return Inertia::render('News/Create');
     }
 
     /**
@@ -55,7 +55,6 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        
     }
 
     /**

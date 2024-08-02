@@ -4,7 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use Inertia\Inertia;
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
@@ -26,6 +26,10 @@ Route::get('/news/{id}/edit', [NewsController::class, 'edit'])->name('news.edit'
 Route::put('/news/{id}', [NewsController::class, 'update'])->name('news.update');
 Route::delete('/news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
 
+
+Route::get('/about-us', function () {
+    return Inertia::render('About');
+})->name('about-us');
 
 
 require __DIR__ . '/auth.php';

@@ -115,11 +115,6 @@ export default defineComponent({
         <NavOptions class="pl-8" />
         <div class="grid grid-cols-4 mt-2 gap-14">
             <div class="col-span-2">
-                <div>
-                    <h2 class="pl-9 text-white text-4xl mt-2 mb-2">
-                        Principais Noticias
-                    </h2>
-                </div>
                 <div class="px-6">
                     <Main />
                 </div>
