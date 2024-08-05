@@ -161,7 +161,7 @@ export default defineComponent({
                         </p>
                     </div>
                 </div>
-                <div class="mt-20">
+                <div class="mt-8">
                     <ThumbNews :articles="articles" />
                 </div>
             </div>

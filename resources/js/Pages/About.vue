@@ -32,17 +32,14 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.slide-enter-active,
-.slide-leave-active {
-    transition: transform 1s, opacity 1s;
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
 }
-.slide-enter, .slide-leave-to /* .slide-leave-active in <2.1.8 */ {
-    transform: translateX(100%);
+
+.fade-enter-from,
+.fade-leave-to {
     opacity: 0;
-}
-.slide-enter-to, .slide-leave /* .slide-leave-active in <2.1.8 */ {
-    transform: translateX(0);
-    opacity: 1;
 }
 </style>
 
@@ -63,7 +60,7 @@ onMounted(() => {
 
     <section id="quem-somos" class="mt-8 bg-gray-100">
         <div class="text-gray-900 text-center m-auto p-2">
-            <div class="grid grid-cols-2 m-auto mt-4">
+            <div class="grid grid-cols-2 m-auto mt-1">
                 <div class="pl-10">
                     <span class="flex justify-start text-md text-gray-500"
                         >Tech News</span
@@ -89,7 +86,7 @@ onMounted(() => {
                     </p>
                 </div>
                 <div class="p-10 mb-4 slide">
-                    <transition name="slide">
+                    <transition name="fade" mode="out-in">
                         <img
                             v-if="!isImageVisible"
                             class="w-full object-cover rounded-lg"
