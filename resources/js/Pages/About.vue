@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import Menu from "/resources/js/Pages/News/_Components/SuperiorMenu.vue";
 import Footer from "/resources/js/Pages/News/_Components/Footer.vue";
+import { scroll, animate } from "motion";
 
 const links = ref([
     {
@@ -22,29 +23,81 @@ const links = ref([
     },
 ]);
 
-const isImageVisible = ref(true);
+const isImageVisible = ref(false);
 
 onMounted(() => {
-    setTimeout(() => {
-        isImageVisible.value = false;
-    }, 100);
+    isImageVisible.value = true;
+    scroll(animate(".progress-bar", { scaleX: [0, 1] }));
+    const progress = document.querySelector(".progress");
+    if (progress) {
+        scroll(({ y }) => {
+            progress.innerHTML = y.progress.toFixed(2);
+        });
+    }
+    inView(".slide img", ({ target }) => {
+        animate(
+            target,
+            { opacity: 1, transform: "translateX(0)" },
+            { delay: 0.2, duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }
+        );
+    });
 });
 </script>
 
 <style scoped>
-.fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s ease;
+    transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
-.fade-enter-from,
+.fade-enter-from {
+    opacity: 0;
+    transform: translateX(100px); /* Inicialmente fora da tela à direita */
+}
+
+.fade-enter-to {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-leave-from {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 .fade-leave-to {
     opacity: 0;
+    transform: translateX(100px);
+}
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #112fa9;
+    transform: scaleX(0);
+    transform-origin: 0%;
+}
+
+.progress {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px;
+    background: var(--splash);
+    color: var(--black);
+    font-size: 18px;
+    font-weight: bold;
+    width: 50px;
+    text-align: center;
+    border-radius: 5px;
 }
 </style>
 
 <template>
     <main class="px-10">
+        <div class="progress-bar"></div>
         <Menu />
         <div>
             <ul class="flex gap-2 text-white">
