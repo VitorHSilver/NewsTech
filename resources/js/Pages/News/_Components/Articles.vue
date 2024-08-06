@@ -76,7 +76,7 @@ const shuffledArticles = computed(() => shuffleArray([...articles.value]));
 <template>
     <CarouselItem
         v-for="article in shuffledArticles"
-        class="space-y-2 sm:basis-1/1"
+        class="space-y-2 sm:basis-1/1 md:basis-1/1 "
     >
         <div class="flex items-center justify-between gap-4">
             <time
@@ -90,16 +90,18 @@ const shuffledArticles = computed(() => shuffleArray([...articles.value]));
                 <span>{{ article.category }}</span>
             </div>
         </div>
-        <img
-            :src="article.image"
-            alt="Imagem da notícia"
-            class="rounded-xl w-full"
-        />
+        <div>
+            <img
+                :src="article.image"
+                alt="Imagem da notícia"
+                class="rounded-xl w-full object-cover"
+            />
+        </div>
         <div class="space-y-4">
             <h3 class="text-xl truncate font-semibold text-gray-100">
                 {{ article.title }}
             </h3>
-            <p class="mt-2 text-sm text-gray-400 comment f">
+            <p class="mt-2 text-sm text-gray-400 flex flex-wrap overflow-hidden max-h-80 sm:max-h-none">
                 {{ article.description }}
             </p>
             <div class="relative flex items-center gap-3 text-gray-500">
@@ -114,6 +116,12 @@ const shuffledArticles = computed(() => shuffleArray([...articles.value]));
     </CarouselItem>
 </template>
 <style scoped>
+@media screen and(max-with: 640px) {
+    .background {
+        background-color: green;
+    }
+}
+
 .comment {
     display: -webkit-box;
     -webkit-box-orient: vertical;

@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import Menu from "/resources/js/Pages/News/_Components/SuperiorMenu.vue";
+import Menu from "/resources/js/Pages/News/_Components/HeaderMenu.vue";
 import Footer from "/resources/js/Pages/News/_Components/Footer.vue";
 import { scroll, animate } from "motion";
 

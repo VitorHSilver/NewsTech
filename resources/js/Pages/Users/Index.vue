@@ -13,7 +13,7 @@ export default defineComponent({
     props: {},
     components: {
         SuperiorMenu: defineAsyncComponent(() =>
-            import("../News/_Components/SuperiorMenu.vue")
+            import("../News/_Components/HeaderMenu.vue")
         ),
         Button,
         Input,

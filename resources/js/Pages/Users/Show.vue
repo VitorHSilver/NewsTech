@@ -1,7 +1,7 @@
 <script>
 import { defineComponent, ref, computed, watch, onMounted } from "vue";
 import { Head, usePage } from "@inertiajs/vue3";
-import SuperiorMenu from "../News/_Components/SuperiorMenu.vue";
+import SuperiorMenu from "../News/_Components/HeaderMenu.vue";
 import {
     AlertDialog,
     AlertDialogAction,

@@ -8,9 +8,9 @@ import {
 import Articles from "./Articles.vue";
 </script>
 <template>
-    <div class="py-4">
+    <div class="py-4 ">
         <Carousel class="relative" :opts="{ align: 'start' }">
-            <CarouselContent :user="user" class="-ml-1">
+            <CarouselContent :user="user" class="-ml-2">
                 <Articles />
             </CarouselContent>
             <CarouselPrevious />

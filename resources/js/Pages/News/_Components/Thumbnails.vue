@@ -63,13 +63,15 @@ export default {
 </script>
 
 <template>
-    <div class="space-y-0 custom:space-y-5 mt-2 py-1">
-        <h2 class="mt-2 mb-2 pl-2 text-lg  custom:text-2xl font-semibold text-gray-100">
+    <div class="space-y-0 custom:space-y-5 mt-2 py-0 max-w-2xl">
+        <h2
+            class="mt-2 mb-2 pl-2 text-lg custom:text-2xl font-semibold text-gray-100"
+        >
             Artigos em destaque
         </h2>
         <div class="pl-2 flex items-start" v-for="post in posts">
             <div
-                class="w-24 custom:w-44 h-24 custom:h-32 overflow-hidden relative flex-shrink-0"
+                class="w-20 custom:w-44 h-24 custom:h-32 overflow-hidden relative flex-shrink-0 max-w-xl custom:max-w-lg"
             >
                 <img
                     :src="post.image"
@@ -85,14 +87,16 @@ export default {
                     >
                         {{ post.title }}
                     </h1>
-                    <p class="text-gray-400 mt-1 text-xs custom:text-sm">
+                    <p
+                        class="text-gray-400 mt-1 text-xs custom:text-sm line-clamp-3"
+                    >
                         {{ post.description }}
                     </p>
                 </a>
             </div>
-            <p class="relative">
+            <p>
                 <span
-                    class="text-gray-400/50 text-xs w-32 h-32 flex justify-end items-start px-4"
+                    class="text-gray-400/50 text-xs w-32 h-32 flex justify-end items-start pr-4"
                 >
                     {{ post.date }}
                 </span>

@@ -100,6 +100,7 @@ module.exports = {
             xl: "1280px",
             "2xl": "1536px",
             custom: "1568px", //ponto personalizado
+            phone: "540px", //ponto personalizado
         },
     },
     plugins: [animate],
