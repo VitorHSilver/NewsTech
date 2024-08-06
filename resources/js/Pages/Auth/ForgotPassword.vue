@@ -6,7 +6,7 @@ import TextInput from "@/Components/TextInput.vue";
 import { Head, useForm } from "@inertiajs/vue3";
 import { defineComponent } from "vue";
 import Button from "@/components/ui/button/Button.vue";
-import MenuSuperior from "@/Pages/News/_Components/SuperiorMenu.vue";
+import MenuSuperior from "@/Pages/News/_Components/HeaderMenu.vue";
 
 export default defineComponent({
     components: {

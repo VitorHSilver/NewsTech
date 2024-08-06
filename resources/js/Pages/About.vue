@@ -22,11 +22,25 @@ const links = ref([
         href: "#contato",
     },
 ]);
+const scrollToSection = (href) => {
+    const section = document.querySelector(href);
+    if (section) {
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        const sectionHeight = section.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollTo = sectionTop - windowHeight / 2 + sectionHeight / 2;
+        window.scrollTo({
+            top: scrollTo,
+            behavior: "smooth",
+        });
+    }
+};
 
-const isImageVisible = ref(false);
+const isImageVisible = ref(true);
 
 onMounted(() => {
-    isImageVisible.value = true;
+    isImageVisible.value = false;
+
     scroll(animate(".progress-bar", { scaleX: [0, 1] }));
     const progress = document.querySelector(".progress");
     if (progress) {
@@ -34,39 +48,21 @@ onMounted(() => {
             progress.innerHTML = y.progress.toFixed(2);
         });
     }
-    inView(".slide img", ({ target }) => {
-        animate(
-            target,
-            { opacity: 1, transform: "translateX(0)" },
-            { delay: 0.2, duration: 0.9, easing: [0.17, 0.55, 0.55, 1] }
-        );
-    });
 });
 </script>
-
 <style scoped>
-.fade-leave-active {
-    transition: opacity 0.9s ease, transform 0.9s ease;
+.slide-fade-enter-active {
+    transition: all 0.4s ease-out;
 }
 
-.fade-enter-from {
+.slide-fade-leave-active {
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateX(40px);
     opacity: 0;
-    transform: translateX(100px); /* Inicialmente fora da tela à direita */
-}
-
-.fade-enter-to {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.fade-leave-from {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.fade-leave-to {
-    opacity: 0;
-    transform: translateX(100px);
 }
 
 .progress-bar {
@@ -78,37 +74,24 @@ onMounted(() => {
     background: #112fa9;
     transform: scaleX(0);
     transform-origin: 0%;
+    z-index: 20;
 }
 
-.progress {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    padding: 10px;
-    background: var(--splash);
-    color: var(--black);
-    font-size: 18px;
-    font-weight: bold;
-    width: 50px;
-    text-align: center;
-    border-radius: 5px;
-}
 </style>
 
 <template>
     <main class="px-10">
         <div class="progress-bar"></div>
         <Menu />
-        <div>
-            <ul class="flex gap-2 text-white">
-                <li
-                    v-for="link in links"
-                    class="text-gray-100 hover:bg-slate-700/50 text-sm p-2 rounded-xl"
-                >
-                    <a :href="link.href">{{ link.name }}</a>
-                </li>
-            </ul>
-        </div>
+        <ul class="flex gap-2 fixed z-10">
+            <li
+                v-for="link in links"
+                @click.prevent="scrollToSection(link.href)"
+                class="text-gray-100 bg-slate-700/50 text-sm p-1 rounded-xl"
+            >
+                <a :href="link.href">{{ link.name }}</a>
+            </li>
+        </ul>
     </main>
 
     <section id="quem-somos" class="mt-8 bg-gray-100">
@@ -119,12 +102,12 @@ onMounted(() => {
                         >Tech News</span
                     >
                     <h2
-                        class="text-6xl tracking-wider font-bold mt-24 text-start mb-6"
+                        class="text-6xl tracking-wider font-bold mt-16 text-start mb-6"
                     >
                         Quem somos
                     </h2>
                     <p
-                        class="text-lg mb-16 tracking-wide w-4/5 mt-16 font-medium text-start"
+                        class="text-lg mb-16 tracking-wide w-3/5 mt-10 font-medium text-start"
                     >
                         " Somos uma empresa de Notícias direcionadas à área
                         Tech. Nosso objetivo é trazer as informações mais
@@ -138,8 +121,8 @@ onMounted(() => {
                         da tecnologia com a NewsTech!"
                     </p>
                 </div>
-                <div class="p-10 mb-4 slide">
-                    <transition name="fade" mode="out-in">
+                <div class="p-10">
+                    <transition name="slide-fade" mode="out-in">
                         <img
                             v-if="!isImageVisible"
                             class="w-full object-cover rounded-lg"
@@ -156,7 +139,7 @@ onMounted(() => {
             Nossa História
         </h2>
         <div>
-            <transition name="fade">
+            <transition>
                 <img
                     v-bind:class="{
                         'transition-transform duration-500 ease-in-out transform hover:scale-105': true,
@@ -169,7 +152,7 @@ onMounted(() => {
         </div>
         <div class="pl-10 flex justify-center">
             <p
-                class="text-center tracking-wide font-medium mt-8 mb-8 w-3/5 pl-2 text-lg"
+                class="text-center tracking-wide font-medium mb-8 w-2/5 pr-2 text-lg"
             >
                 Nossa historia começou em 2010, quando um grupo de amigos
                 apaixonados por tecnologia decidiu criar um site de notícias
@@ -182,20 +165,22 @@ onMounted(() => {
     <section id="nossos-profissionais" class="bg-white mt-24">
         <div class="pr-10 grid grid-cols-2">
             <div class="px-10 py-16">
-                <img
-                    class="rounded-lg object-contain"
-                    src="/img/team.jpg"
-                    alt=""
-                />
+                <Transition name="slide-up">
+                    <img
+                        class="rounded-lg object-contain"
+                        src="/img/team.jpg"
+                        alt=""
+                    />
+                </Transition>
             </div>
-            <div>
+            <div class="flex justify-center flex-col items-center">
                 <h2
-                    class="text-6xl p-6 tracking-wider font-bold text-center mt-14 mb-6"
+                    class="text-6xl p-2 tracking-wider font-bold text-center mb-8"
                 >
                     Nossos Profissionais
                 </h2>
                 <p
-                    class="text-end tracking-wide font-medium mt-16 pl-2 text-lg"
+                    class="text-end tracking-wide font-medium w-4/5 mt-4 text-lg"
                 >
                     Nossa equipe é formada por profissionais altamente
                     qualificados e apaixonados por tecnologia. Estamos sempre em

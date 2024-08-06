@@ -10,8 +10,8 @@ import { Head } from "@inertiajs/vue3";
 import { router } from "@inertiajs/vue3";
 import Vue3Toastify, { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
-
-const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+const appName =
+    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

@@ -63,12 +63,14 @@ export default {
 </script>
 
 <template>
-    <div class="space-y-5 mt-6">
-        <h2 class="text-2xl font-semibold text-gray-100">
+    <div class="space-y-0 custom:space-y-5 mt-2 py-1">
+        <h2 class="mt-2 mb-2 pl-2 text-lg  custom:text-2xl font-semibold text-gray-100">
             Artigos em destaque
         </h2>
-        <div class="pl-0 flex items-start" v-for="post in posts">
-            <div class="w-48 h-32 overflow-hidden relative flex-shrink-0">
+        <div class="pl-2 flex items-start" v-for="post in posts">
+            <div
+                class="w-24 custom:w-44 h-24 custom:h-32 overflow-hidden relative flex-shrink-0"
+            >
                 <img
                     :src="post.image"
                     alt="img do post"
@@ -79,18 +81,18 @@ export default {
             <div class="ml-3 flex flex-col justify-between">
                 <a :href="post.href">
                     <h1
-                        class="text-white max-w-lg text-xl font-medium truncate-title"
+                        class="text-white max-w-lg text-md custom:text-xl font-medium truncate-title"
                     >
                         {{ post.title }}
                     </h1>
-                    <p class="text-gray-400 mt-2 text-sm">
+                    <p class="text-gray-400 mt-1 text-xs custom:text-sm">
                         {{ post.description }}
                     </p>
                 </a>
             </div>
-            <p>
+            <p class="relative">
                 <span
-                    class="text-gray-400 text-xs w-32 h-32 flex justify-end items-start"
+                    class="text-gray-400/50 text-xs w-32 h-32 flex justify-end items-start px-4"
                 >
                     {{ post.date }}
                 </span>
