@@ -76,7 +76,6 @@ onMounted(() => {
     transform-origin: 0%;
     z-index: 20;
 }
-
 </style>
 
 <template>
@@ -107,7 +106,7 @@ onMounted(() => {
                         Quem somos
                     </h2>
                     <p
-                        class="text-lg mb-16 tracking-wide w-3/5 mt-10 font-medium text-start"
+                        class="text-lg mb-16 tracking-wide w-4/5 font-medium text-start flex items-center"
                     >
                         " Somos uma empresa de Notícias direcionadas à área
                         Tech. Nosso objetivo é trazer as informações mais
