@@ -43,7 +43,7 @@ const props = defineProps({
                     ref="menuTrigger"
                     class="cursor-pointer menu-mobile"
                 ></MenubarTrigger>
-                <MenubarContent class="mr-2 bg-gray-50">
+                <MenubarContent class="mr-4 bg-gray-50">
                     <MenubarItem v-if="!user">
                         <Link
                             :href="route('login')"
