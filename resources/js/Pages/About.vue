@@ -95,7 +95,7 @@ onMounted(() => {
         </ul>
     </main>
 
-    <section id="quem-somos" class="mt-6 bg-gray-100">
+    <section id="quem-somos" class="mt-8 bg-gray-100">
         <div class="text-gray-900 text-center m-auto p-2">
             <div class="grid grid-cols-2 m-auto mt-1">
                 <div class="pl-10">
