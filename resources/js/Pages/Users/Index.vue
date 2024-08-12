@@ -104,18 +104,21 @@ option {
     <main class="px-10">
         <SuperiorMenu :url-atual="urlAtual" />
         <div
-            class="flex items-center justify-center backgroundProject py-4 sm:py-14"
+            class="flex items-center justify-center backgroundProject py-4 sm:py-6"
         >
-            <form @submit.prevent="handleSubmit">
+            <form
+                @submit.prevent="handleSubmit"
+                class="bg-gray-200/20 shadow-md shadow-gray-900/25 p-4 rounded-lg"
+            >
                 <div class="space-y-12">
-                    <div class="border-b border-gray-900/10 pb-4">
+                    <div class="border-b border-gray-900/10 pb-2">
                         <h2
                             class="text-base font-semibold leading-6 text-gray-100/50"
                         >
                             Criação de conta
                         </h2>
                         <div
-                            class="mt-8 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
+                            class="mt-4 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6"
                         >
                             <div class="sm:col-span-4">
                                 <label

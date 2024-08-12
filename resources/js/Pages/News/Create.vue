@@ -1,12 +1,22 @@
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import HeaderMenu from "./_Components/HeaderMenu.vue";
 import Input from "@/components/ui/input/Input.vue";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
+import Button from "@/components/ui/button/Button.vue";
+
+const props = defineProps({
+    auth: {
+        type: Object,
+    },
+});
 
 const form = useForm({
     title: "",
     content: "",
-    image: "",
+    autor: props.auth.user ? props.auth.user.name : "",
+    date: "",
 });
 
 const handleSubmit = () => {
@@ -15,43 +25,84 @@ const handleSubmit = () => {
 </script>
 
 <template>
+    <Head title="Publish your news" />
     <HeaderMenu />
     <section class="items-center mx-auto max-w-6xl">
         <div
-            class="text-black bg-gray-200/50 flex justify-center items-center w-full rounded-lg"
+            class="text-black flex justify-center items-center w-full rounded-lg"
         >
-            <form form @submit.prevent="handleSubmit">
-                <div class="flex flex-col gap-2">
+            <form
+                @submit.prevent="handleSubmit"
+                class="w-full bg-gray-200/20 shadow-md shadow-gray-900/25 p-4 rounded-lg"
+            >
+                <div class="grid grid-cols-2 gap-x-14 p-4">
                     <div>
-                        <label for="title">Titulo</label>
+                        <label
+                            class="block text-sm font-medium leading-6 text-zinc-200"
+                            for="title"
+                            >Titulo</label
+                        >
                         <div>
                             <Input
-                                class="w-80 text-black"
+                                class="text-zinc-200 bg-transparent"
                                 v-model="form.title"
                             />
                         </div>
                     </div>
                     <div>
-                        <label for="image">image url</label>
+                        <label
+                            :auth="auth"
+                            class="block text-sm font-medium leading-6 text-zinc-200"
+                            for="autor"
+                            >Autor:</label
+                        >
+                        <Input
+                            class="w-96 bg-transparent text-zinc-200"
+                            type="text"
+                            v-model="form.autor"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            class="block text-sm font-medium leading-6 text-zinc-200"
+                            for="local"
+                            >Local:</label
+                        >
+                        <Input
+                            class="w-80 text-zinc-200 bg-transparent"
+                            type="text"
+                            v-model="form.local"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            class="block text-sm font-medium leading-6 text-zinc-200"
+                            for="date"
+                            >Data:</label
+                        >
+                        <Input
+                            class="w-50 bg-transparent text-zinc-200"
+                            type="date"
+                            v-model="form.date"
+                        />
+                    </div>
+                    <div class="col-span-2">
+                        <label
+                            class="block text-sm font-medium leading-6 text-zinc-200"
+                            for="content"
+                            >Resumo da informação:</label
+                        >
                         <div>
-                            <Input
-                                class="w-80 text-black"
-                                type="text"
-                                v-model="form.image"
+                            <QuillEditor
+                                class="w-full resize-y pb-4 mb-4 text-zinc-200"
+                                v-model="form.content"
                             />
                         </div>
                     </div>
-                    <div>
-                        <label for="content">Conteudo:</label>
-                        <div>
-                            <textarea
-                                class="w-80 resize-y rounded mb-4 text-black"
-                                v-model="form.content"
-                            ></textarea>
-                        </div>
-                    </div>
                 </div>
-                <button type="submit">Submit</button>
+                <div class="col-span-2 flex justify-end pt-2 pr-4">
+                    <Button type="submit" variant="success">Submit</Button>
+                </div>
             </form>
         </div>
     </section>
