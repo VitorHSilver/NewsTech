@@ -3,6 +3,7 @@ import { onMounted, ref } from "vue";
 import Menu from "/resources/js/Pages/News/_Components/HeaderMenu.vue";
 import Footer from "/resources/js/Pages/News/_Components/Footer.vue";
 import { scroll, animate } from "motion";
+import { Head } from "@inertiajs/vue3";
 
 const links = ref([
     {
@@ -79,6 +80,7 @@ onMounted(() => {
 </style>
 
 <template>
+    <Head title="Quem-somos" />
     <main class="px-10">
         <div class="progress-bar"></div>
         <Menu />
@@ -101,7 +103,7 @@ onMounted(() => {
                         >Tech News</span
                     >
                     <h2
-                        class="text-6xl tracking-wider font-bold mt-16 text-start mb-6"
+                        class="text-6xl tracking-wider font-bold mt-12 text-start mb-4"
                     >
                         Quem somos
                     </h2>
