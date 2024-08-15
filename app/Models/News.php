@@ -8,12 +8,13 @@ class News extends Model
 {
     protected $fillable = [
         'title',
-        'description',
+        'content',
         'image',
         'source_url',
+        'publish_date',
+        'publish_time',
+        'location',
     ];
-
-
 
     public function user()
     {
