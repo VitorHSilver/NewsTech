@@ -14,9 +14,15 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('author_alias')->nullable();
             $table->string('title');
-            $table->text('description');
+            $table->text('content');
+            $table->date('publish_date')->nullable();
+            $table->time('publish_time')->nullable();
+            $table->string('location')->nullable();
+            $table->string('source')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('terms_accepted')->default(false);
             $table->timestamps();
         });
     }
