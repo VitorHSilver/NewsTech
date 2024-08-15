@@ -63,21 +63,21 @@ export default {
 </script>
 
 <template>
-    <div class="space-y-0 custom:space-y-5 mt-2 py-0 max-w-2xl">
+    <div class="space-y-0 custom:space-y-5  mt-2 py-0 max-w-2xl">
         <h2
-            class="mt-2 mb-2 pl-2 text-lg custom:text-2xl font-semibold text-gray-100"
+            class="mt-1 mb-2 pl-2 text-lg custom:text-2xl font-semibold text-gray-100 md:text-3xl"
         >
             Artigos em destaque
         </h2>
         <div class="pl-2 flex items-start" v-for="post in posts">
             <div
-                class="w-20 custom:w-44 h-24 custom:h-32 overflow-hidden relative flex-shrink-0 max-w-xl custom:max-w-lg"
+                class="w-20 md:h-20  custom:w-44 h-24 custom:h-32 overflow-hidden relative flex-shrink-0 max-w-xl custom:max-w-lg"
             >
                 <img
                     :src="post.image"
                     alt="img do post"
                     :style="post.style"
-                    class="object-cover rounded-lg"
+                    class="md:object-center  object-cover rounded-lg"
                 />
             </div>
             <div class="ml-3 flex flex-col justify-between">

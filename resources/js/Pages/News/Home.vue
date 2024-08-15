@@ -139,7 +139,7 @@ export default defineComponent({
             </div>
             <div class="col-span-1">
                 <div class="flex justify-between flex-wrap items-end">
-                    <p class="text-gray-400 pl-2 text-sm capitalize pb-1">
+                    <p class="text-gray-400 pl-2 text-sm capitalize pb-1 order-2 mt-2">
                         {{ dateNow }}
                         <span class="text-white font-semibold pl-1">
                             {{ greeting }}

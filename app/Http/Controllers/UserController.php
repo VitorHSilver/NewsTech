@@ -20,9 +20,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -82,8 +80,9 @@ class UserController extends Controller
                 'city' => strtolower($data['city']),
                 'region' => strtolower($data['region']),
             ]);
-
-            $user->save();
+            // Autenticação do usuário
+            Auth::login($user);
+            
         } catch (\Throwable $th) {
             if (env('APP_DEBUG')) {
                 dd($th->getMessage());
@@ -91,9 +90,10 @@ class UserController extends Controller
             }
         }
         // Redirecionamento para a página de perfil do usuário
-        return redirect()->route('users.show');
+        return Inertia::render('Users/Show', [
+            'user' => Auth::user(),
+        ]);
     }
-
 
     /**
      * Display the specified resource.
