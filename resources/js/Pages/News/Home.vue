@@ -130,8 +130,8 @@ export default defineComponent({
     <Head title="Home Page" />
     <main class="px-10">
         <Menu :user="user" />
-        <NavOptions class="pl-8" />
-        <div class="grid grid-cols-2 gap-14 ">
+        <NavOptions class="pl-5" />
+        <div class="grid grid-cols-2 gap-14">
             <div class="col-span-1">
                 <div class="px-4 mt-2 custom:mt-0">
                     <Carousel />
@@ -139,7 +139,9 @@ export default defineComponent({
             </div>
             <div class="col-span-1">
                 <div class="flex justify-between flex-wrap items-end">
-                    <p class="text-gray-400 pl-2 text-sm capitalize pb-1 order-2 mt-2">
+                    <p
+                        class="text-gray-400 pl-2 text-sm capitalize pb-1 order-2 mt-2"
+                    >
                         {{ dateNow }}
                         <span class="text-white font-semibold pl-1">
                             {{ greeting }}
@@ -179,7 +181,7 @@ export default defineComponent({
                         </p>
                     </div>
                 </div>
-                <div class="mt-2 custom:mt-8 ">
+                <div class="mt-2 custom:mt-8">
                     <ThumbNews :articles="articles" />
                 </div>
             </div>

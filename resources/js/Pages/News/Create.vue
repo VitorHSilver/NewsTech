@@ -9,13 +9,15 @@ import Button from "@/components/ui/button/Button.vue";
 const props = defineProps({
     auth: {
         type: Object,
+        required: true,
     },
 });
 
+const user = props.auth.user || {};
 const form = useForm({
     title: "",
     content: "",
-    autor: props.auth.user ? props.auth.user.name : "",
+    autor: user.name,
     date: "",
     time: "",
     local: "",
@@ -31,22 +33,21 @@ const handleSubmit = () => {
 <template>
     <Head title="Publish your news" />
     <HeaderMenu />
+
     <section class="items-center mx-auto max-w-6xl">
         <main class="px-4">
             <div
                 class="text-black flex justify-center items-center w-full rounded-lg"
             >
-            
                 <form
                     @submit.prevent="handleSubmit"
                     class="w-full bg-gray-200/20 shadow-md shadow-gray-900/25 p-4 rounded-lg"
                 >
-                <div class="mt-2 px-4">
-                            <span
-                                class="flex justify-start text-md text-gray-500"
-                                >Tech News</span
-                            >
-                        </div>
+                    <div class="mt-2 px-4">
+                        <span class="flex justify-start text-md text-gray-500"
+                            >Tech News</span
+                        >
+                    </div>
                     <div class="grid grid-cols-2 gap-x-14 p-4">
                         <div>
                             <label
@@ -139,7 +140,7 @@ const handleSubmit = () => {
                                 />
                             </div>
                         </div>
-                     
+
                         <div class="col-span-2 mt-4">
                             <label
                                 class="block text-sm font-medium leading-6 text-zinc-200 mb-1"

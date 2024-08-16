@@ -8,13 +8,9 @@ import {
     MenubarTrigger,
 } from "@/components/ui/menubar";
 import "@/Pages/Users/Index.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 
 const props = defineProps({
-    user: {
-        type: Object,
-        required: true,
-    },
     showUserName: {
         type: Boolean,
         default: true,
@@ -23,6 +19,8 @@ const props = defineProps({
         type: String,
     },
 });
+const { props: pageProps } = usePage();
+const user = pageProps.auth.user;
 </script>
 
 <template>

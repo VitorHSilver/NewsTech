@@ -1,7 +1,7 @@
 <script>
 import { defineAsyncComponent } from "vue";
 import Button from "@/components/ui/button/Button.vue";
-import { useForm, Link } from "@inertiajs/vue3";
+import { useForm, Link, Head } from "@inertiajs/vue3";
 import { defineComponent, ref } from "vue";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
@@ -19,6 +19,7 @@ export default defineComponent({
         Input,
         Link,
         InputError,
+        Head,
     },
     setup() {
         const form = useForm({
@@ -101,6 +102,7 @@ option {
 }
 </style>
 <template>
+    <Head title="Creating account " />
     <main class="px-10">
         <SuperiorMenu :url-atual="urlAtual" />
         <div
@@ -108,15 +110,13 @@ option {
         >
             <form
                 @submit.prevent="handleSubmit"
-                class="bg-gray-200/20 shadow-md shadow-gray-900/25 p-4 rounded-lg"
+                class="bg-gray-200/20 shadow-md shadow-gray-900/25 p-10 rounded-lg"
             >
                 <div class="space-y-12">
-                    <div class="border-b border-gray-900/10 pb-2">
-                        <h2
-                            class="text-base font-semibold leading-6 text-gray-100/50"
+                    <div>
+                        <span class="flex justify-start text-md text-gray-500"
+                            >Tech News</span
                         >
-                            Criação de conta
-                        </h2>
                         <div
                             class="mt-4 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6"
                         >
