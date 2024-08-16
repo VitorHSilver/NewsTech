@@ -11,6 +11,10 @@ import "@/Pages/Users/Index.vue";
 import { Link, usePage } from "@inertiajs/vue3";
 
 const props = defineProps({
+    user: {
+        type: Object,
+        required: true,
+    },
     showUserName: {
         type: Boolean,
         default: true,
@@ -21,6 +25,7 @@ const props = defineProps({
 });
 const { props: pageProps } = usePage();
 const user = pageProps.auth.user;
+console.log(user);
 </script>
 
 <template>
@@ -35,7 +40,9 @@ const user = pageProps.auth.user;
             </div>
         </div>
         <Menubar class="header bg-#141B37 border-none mt-4">
-            <span v-if="user && showUserName">{{ user.name }}</span>
+            <span class="capitalize" v-if="user && showUserName">{{
+                user.firstName
+            }}</span>
             <MenubarMenu>
                 <MenubarTrigger
                     ref="menuTrigger"

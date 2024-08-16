@@ -74,7 +74,7 @@ export default defineComponent({
                 <h1
                     class="text-gray-100 text-center text-5xl font-regular uppercase"
                 >
-                    {{ user.name }}
+                    {{ user.firstName }} {{ user.lastName }}
                 </h1>
                 <p
                     class="pl-1 text-md text-center text-gray-600 capitalize mt-2"

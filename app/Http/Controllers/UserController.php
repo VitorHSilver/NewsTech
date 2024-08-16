@@ -29,7 +29,8 @@ class UserController extends Controller
     {
         // Validação dos dados do formulário
         $data = $request->validate([
-            'name' => 'required|min:5|max:255',
+            'firstName' => 'required|min:5|max:255',
+            'lastName' => 'required|min:5|max:255',
             'password' => 'required|min:3|max:255',
             'email' => 'required|email:rfc,dns|unique:users,email',
             'postalCode' => 'required|min:4|max:9',
@@ -40,9 +41,12 @@ class UserController extends Controller
             'region' => 'required|min:2|max:255',
         ], [
             // Mensagens de erro
-            'name.required' => 'O campo nome é obrigatório.',
-            'name.min' => 'O nome deve ter pelo menos 5 caracteres.',
-            'name.max' => 'O nome não pode exceder 255 caracteres.',
+            'firstName.required' => 'O nome é obrigatório.',
+            'lastName.required' => 'O sobrenome é obrigatório.',
+            'firstName.min' => 'O nome deve ter pelo menos 5 caracteres.',
+            'lastName.min' => 'O sobrenome deve ter pelo menos 5 caracteres.',
+            'firstName.max' => 'O nome não pode exceder 255 caracteres.',
+            'lastName.max' => 'O sobrenome não pode exceder 255 caracteres.',
             'password.required' => 'A senha é obrigatória.',
             'password.min' => 'A senha deve ter pelo menos 3 caracteres.',
             'password.max' => 'A senha não pode exceder 255 caracteres.',
@@ -70,7 +74,8 @@ class UserController extends Controller
         // Criação do usuário
         try {
             $user = User::create([
-                'name' => strtolower($data['name']),
+                'firstName' => strtolower($data['firstName']),
+                'lastName' => strtolower($data['lastName']),
                 'password' => bcrypt($data['password']),
                 'email' => $data['email'],
                 'postalCode' => $data['postalCode'],
@@ -82,7 +87,6 @@ class UserController extends Controller
             ]);
             // Autenticação do usuário
             Auth::login($user);
-            
         } catch (\Throwable $th) {
             if (env('APP_DEBUG')) {
                 dd($th->getMessage());

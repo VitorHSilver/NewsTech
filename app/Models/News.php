@@ -15,6 +15,7 @@ class News extends Model
         'publish_time',
         'location',
         'author_alias',
+        'terms_accepted',
     ];
 
     public function user()

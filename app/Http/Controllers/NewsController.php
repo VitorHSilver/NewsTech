@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -48,14 +49,59 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        // validação
+        $newsPost = $request->validate([
+            'title' => 'required|min:5|max:255',
+            'content' => 'required|max:255',
+            'author' => 'required|min:3|max:255',
+            'source_url' => 'required|min:3|max:255|url',
+            'publish_date' => 'required|date',
+            'terms_accepted' => 'required',
+
+
+        ], [
+            // Mensagens de erro
+            'title.required' => 'O título é obrigatório.',
+            'title.min' => 'O título deve ter pelo menos 5 caracteres.',
+            'title.max' => 'O título deve ter no máximo 255 caracteres.',
+            'content.required' => 'O conteúdo é obrigatório.',
+            'content.max' => 'O conteúdo deve ter no máximo 255 caracteres.',
+            'author.required' => 'O autor é obrigatório.',
+            'author.min' => 'O autor deve ter pelo menos 3 caracteres.',
+            'author.max' => 'O autor deve ter no máximo 255 caracteres.',
+            'source.required' => 'A fonte é obrigatória.',
+            'source.min' => 'A fonte deve ter pelo menos 3 caracteres.',
+            'source.max' => 'A fonte deve ter no máximo 255 caracteres.',
+            'source.url' => 'A fonte deve ser uma URL válida.',
+            'date.required' => 'A data é obrigatória.',
+            'date.date' => 'A data deve ser uma data válida.',
+        ]);
+
+        dd('passou');
+        try {
+            $news = News::create([
+                'title' => strtolower($newsPost['title']),
+                'content' => strtolower($newsPost['content']),
+                'author_alias' => strtolower($newsPost['author']),
+                'source_url' => $newsPost['source_url'],
+                'publish_date' => $newsPost['date'],
+                'publish_time' => $newsPost['date'],
+                'location' => $newsPost['date'],
+                'terms_accepted' => $newsPost['terms_accepted'],
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erro ao salvar a notícia.' . $e->getMessage());
+        }
+        // Redirecionamento para a página de perfil do usuário
+        return Inertia::render('Users/Show', [
+            'user' => Auth::user(),
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.

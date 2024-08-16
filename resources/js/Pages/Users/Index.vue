@@ -158,7 +158,7 @@ option {
                                     />
                                 </div>
                                 <span class="text-red-500 text-xs">
-                                    {{ form.errors.name }}
+                                    {{ form.errors.lastName }}
                                 </span>
                             </div>
 

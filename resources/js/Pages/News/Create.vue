@@ -14,25 +14,46 @@ const props = defineProps({
 });
 
 const user = props.auth.user || {};
+
+const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+};
+
 const form = useForm({
     title: "",
     content: "",
-    autor: user.name,
-    date: "",
-    time: "",
-    local: "",
+    author: user.firstName,
+    publish_date: getCurrentDate(),
+    publish_time: "",
+    location: "",
     file: "",
-    source: "",
+    source_url: "",
+    terms_accepted: false,
 });
 
 const handleSubmit = () => {
-    console.log(form.title);
+    form.post(route("news.store"), {
+        preserveScroll: true,
+        onSuccess: () => {
+            form.reset();
+        },
+        onError: (error) => {
+            console.log("error =>", error);
+        },
+        onFinish: () => {
+            if (!form.errors) form.reset();
+        },
+    });
 };
 </script>
 
 <template>
     <Head title="Publish your news" />
-    <HeaderMenu />
+    <HeaderMenu :user="user" />
 
     <section class="items-center mx-auto max-w-6xl">
         <main class="px-4">
@@ -55,38 +76,51 @@ const handleSubmit = () => {
                                 for="title"
                                 >Titulo</label
                             >
-                            <div>
-                                <Input
-                                    class="text-zinc-200 bg-transparent"
-                                    v-model="form.title"
-                                />
-                            </div>
+                            <Input
+                                type="text"
+                                name="title"
+                                id="title"
+                                class="text-zinc-200 bg-transparent capitalize border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                v-model="form.title"
+                            />
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.title }}
+                            </span>
                         </div>
                         <div>
                             <label
-                                :auth="auth"
                                 class="block text-sm font-medium leading-6 text-zinc-200"
                                 for="autor"
                                 >Autor:</label
                             >
                             <Input
-                                class="w-80 bg-transparent text-zinc-200"
-                                type="text"
-                                v-model="form.autor"
+                                tye="text"
+                                name="autor"
+                                id="autor"
+                                class="w-80 bg-transparent text-zinc-200 capitalize border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                v-model="form.author"
                             />
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.author }}
+                            </span>
                         </div>
                         <div class="mt-4">
                             <label
                                 class="block text-sm font-medium leading-6 text-zinc-200"
-                                for="local"
+                                for="location"
                                 >Local:</label
                             >
                             <Input
-                                class="w-full text-zinc-200 bg-transparent"
                                 type="text"
+                                name="location"
+                                id="location"
                                 autocomplete="street-address"
-                                v-model="form.local"
+                                class="w-full text-zinc-200 bg-transparent border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                v-model="form.location"
                             />
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.location }}
+                            </span>
                         </div>
                         <div class="mt-4 flex space-x-2">
                             <div class="flex flex-col">
@@ -96,10 +130,15 @@ const handleSubmit = () => {
                                     >Data:</label
                                 >
                                 <Input
-                                    class="w-50 bg-transparent text-zinc-200"
+                                    class="w-50 bg-transparent text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                     type="date"
-                                    v-model="form.date"
+                                    name="date"
+                                    id="date"
+                                    v-model="form.publish_date"
                                 />
+                                <span class="text-red-500 text-xs">
+                                    {{ form.errors.publish_date }}
+                                </span>
                             </div>
                             <div class="flex flex-col">
                                 <label
@@ -108,22 +147,26 @@ const handleSubmit = () => {
                                     >Hora:</label
                                 >
                                 <Input
-                                    class="w-25 bg-transparent text-white"
+                                    id="time"
+                                    name="time"
+                                    class="w-25 bg-transparent text-white border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                     type="time"
-                                    v-model="form.time"
+                                    v-model="form.publish_time"
                                 />
                             </div>
                         </div>
                         <div class="mt-4">
                             <label
                                 class="block text-sm font-medium leading-6 text-zinc-200"
-                                for="text"
+                                for="source"
                                 >Fonte:</label
                             >
                             <Input
-                                class="w-full text-zinc-200 bg-transparent mb-2"
+                                class="w-full text-zinc-200 bg-transparent mb-2 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                 type="text"
-                                v-model="form.source"
+                                name="source"
+                                id="source"
+                                v-model="form.source_url"
                             />
                         </div>
                         <div>
@@ -134,9 +177,9 @@ const handleSubmit = () => {
                                     >Arquivos de imagem:</label
                                 >
                                 <Input
-                                    class="w-80 text-zinc-200"
+                                    class="w-80 text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                     type="file"
-                                    v-model="form.file"
+                                    v-model="form.image"
                                 />
                             </div>
                         </div>
@@ -149,17 +192,22 @@ const handleSubmit = () => {
                             >
                             <div>
                                 <QuillEditor
-                                    class="w-full resize-y pb-4 mb-4 text-zinc-200"
+                                    id="content"
+                                    name="content"
+                                    class="w-full resize-y pb-4 mb-4 text-zinc-200 bg-transparent border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                     v-model="form.content"
                                 />
                             </div>
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.content }}
+                            </span>
                         </div>
                         <div class="mt-1 col-span-2 flex-wrap">
                             <label type="checkbox" class="text-zinc-200">
                                 <input
                                     type="checkbox"
                                     class="text-zinc-200"
-                                    v-model="form.terms"
+                                    v-model="form.terms_accepted"
                                 />
                                 <p class="inline text-xs">
                                     Autorizo a reprodução das informações acima

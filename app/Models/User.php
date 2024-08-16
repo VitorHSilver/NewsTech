@@ -19,6 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'firstName',
         'lastName',
+        'fullName',
         'password',
         'email',
         'country',
@@ -29,6 +30,17 @@ class User extends Authenticatable
         'region',
         'roles',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($user) {
+            $user->fullName = $user->firstName . ' ' . $user->lastName;
+        });
+
+        static::updating(function ($user) {
+            $user->fullName = $user->firstName . ' ' . $user->lastName;
+        });
+    }
 
     /**
      * The attributes that should be hidden for serialization.
