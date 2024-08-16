@@ -23,7 +23,8 @@ export default defineComponent({
     },
     setup() {
         const form = useForm({
-            name: "",
+            firstName: "",
+            lastName: "",
             password: "",
             email: "",
             country: "",
@@ -120,11 +121,11 @@ option {
                         <div
                             class="mt-4 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6"
                         >
-                            <div class="sm:col-span-4">
+                            <div class="sm:col-span-2">
                                 <label
                                     for="name"
                                     class="block text-sm font-medium leading-6 text-zinc-200"
-                                    >Nome</label
+                                    >Primeiro Nome</label
                                 >
                                 <div class="mt-2">
                                     <Input
@@ -133,7 +134,27 @@ option {
                                         id="name"
                                         autocomplete="given-name"
                                         class="h-9 capitalize bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                        v-model="form.name"
+                                        v-model="form.firstName"
+                                    />
+                                </div>
+                                <span class="text-red-500 text-xs">
+                                    {{ form.errors.name }}
+                                </span>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label
+                                    for="lastName"
+                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    >Sobrenome</label
+                                >
+                                <div class="mt-2">
+                                    <Input
+                                        type="text"
+                                        name="lastName"
+                                        id="lastName"
+                                        autocomplete="given-name"
+                                        class="h-9 capitalize bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        v-model="form.lastName"
                                     />
                                 </div>
                                 <span class="text-red-500 text-xs">
