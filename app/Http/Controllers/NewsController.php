@@ -49,8 +49,9 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        // validação
-        $newsPost = $request->validate([
+            dd($request->all());
+            // validação
+            $newsPost = $request->validate([
             'title' => 'required|min:5|max:255',
             'content' => 'required|max:255',
             'author' => 'required|min:3|max:255',
@@ -77,7 +78,6 @@ class NewsController extends Controller
             'date.date' => 'A data deve ser uma data válida.',
         ]);
 
-        dd('passou');
         try {
             $news = News::create([
                 'title' => strtolower($newsPost['title']),
