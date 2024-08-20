@@ -1,6 +1,8 @@
 import "./bootstrap";
 import "../css/app.css";
 import "../css/font.css";
+import "md-editor-v3/lib/preview.css";
+import "md-editor-v3/lib/style.css";
 
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
@@ -10,6 +12,8 @@ import { Head } from "@inertiajs/vue3";
 import { router } from "@inertiajs/vue3";
 import Vue3Toastify, { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import PrimeVue from "primevue/config";
+import "primeicons/primeicons.css";
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
@@ -26,6 +30,7 @@ createInertiaApp({
             .use(ZiggyVue)
             .use(router)
             .use(Head)
+            .use(PrimeVue)
             .use(Vue3Toastify, { autoClose: 2000, position: "bottom-right" })
             .mount(el);
     },

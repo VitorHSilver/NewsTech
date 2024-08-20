@@ -2,18 +2,19 @@
 import { Head, useForm } from "@inertiajs/vue3";
 import HeaderMenu from "./_Components/HeaderMenu.vue";
 import Input from "@/components/ui/input/Input.vue";
-import { QuillEditor } from "@vueup/vue-quill";
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import Button from "@/components/ui/button/Button.vue";
-import { defineComponent, watch, watchEffect } from "vue";
+import { defineComponent } from "vue";
+import { MdEditor } from "md-editor-v3";
+import FileUpload from "primevue/fileupload";
 
 export default defineComponent({
     components: {
         Head,
         HeaderMenu,
         Input,
-        QuillEditor,
         Button,
+        MdEditor,
+        FileUpload,
     },
     props: {
         auth: {
@@ -34,7 +35,11 @@ export default defineComponent({
 
         const form = useForm({
             title: "",
-            content: "",
+            content: `### Titulo
+            
+<p> escreva o conteúdo da noticia  </p>
+
+`,
             author: user.firstName,
             publish_date: getCurrentDate(),
             publish_time: "",
@@ -43,14 +48,6 @@ export default defineComponent({
             source_url: "",
             terms_accepted: false,
         });
-
-        watchEffect(() => {
-            console.log("form.content mudou para:", form.content.innerText);
-        });
-
-        const updateContent = (content) => {
-            form.content = content;
-        };
 
         const handleSubmit = () => {
             form.post(route("news.store"), {
@@ -70,7 +67,6 @@ export default defineComponent({
         return {
             form,
             handleSubmit,
-            updateContent,
         };
     },
 });
@@ -87,7 +83,7 @@ export default defineComponent({
             >
                 <form
                     @submit.prevent="handleSubmit"
-                    class="w-full bg-gray-200/20 shadow-md shadow-gray-900/25 p-4 rounded-lg"
+                    class="w-full bg-gray-100/20 shadow-md shadow-gray-900/25 p-4 rounded-lg"
                 >
                     <div class="mt-2 px-4">
                         <span class="flex justify-start text-md text-gray-500"
@@ -194,17 +190,23 @@ export default defineComponent({
                                 v-model="form.source_url"
                             />
                         </div>
-                        <div>
-                            <div class="mt-4">
+                        <div class="flex items-center">
+                            <div class="mt-4 card flex justify-center gap-4">
                                 <label
                                     class="block text-sm font-medium leading-6 text-zinc-200"
                                     for="file"
                                     >Thumbnail:</label
                                 >
-                                <Input
-                                    class="w-80 text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                    type="file"
-                                    v-model="form.image"
+                                <FileUpload
+                                    class="text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500"
+                                    focus:ring-1
+                                    mode="basic"
+                                    name="demo[]"
+                                    label="Escolher arquivo"
+                                    url="/api/upload"
+                                    severity="info"
+                                    accept="image/*"
+                                    maxFileSize="1000000"
                                 />
                             </div>
                         </div>
@@ -216,12 +218,13 @@ export default defineComponent({
                                 >Resumo da informação:</label
                             >
                             <div>
-                                <QuillEditor
-                                    id="content"
-                                    name="content"
-                                    class="w-full resize-y pb-4 mb-4 text-zinc-200 bg-transparent border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                    v-model:value="form.content"
-                                    @input="updateContent"
+                                <MdEditor
+                                    v-model="form.content"
+                                    theme="dark"
+                                    codeTheme="github"
+                                    language="en-US"
+                                    placeholder="Digite aqui o conteúdo da notícia"
+                                    noUploadImg="false"
                                 />
                             </div>
                             <span class="text-red-500 text-xs">

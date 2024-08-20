@@ -25,7 +25,6 @@ const props = defineProps({
 });
 const { props: pageProps } = usePage();
 const user = pageProps.auth.user;
-console.log(user);
 </script>
 
 <template>
