@@ -49,11 +49,10 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-            dd($request->all());
-            // validação
-            $newsPost = $request->validate([
+        // validação
+        $newsPost = $request->validate([
             'title' => 'required|min:5|max:255',
-            'content' => 'required|max:255',
+            'content' => 'required|min:50 ',
             'author' => 'required|min:3|max:255',
             'source_url' => 'required|min:3|max:255|url',
             'publish_date' => 'required|date',

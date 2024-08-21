@@ -35,15 +35,11 @@ export default defineComponent({
 
         const form = useForm({
             title: "",
-            content: `### Titulo
-            
-<p> escreva o conteúdo da noticia  </p>
-
-`,
+            content: "",
             author: user.firstName,
             publish_date: getCurrentDate(),
-            publish_time: "",
-            location: "",
+            // publish_time: "",
+            // location: "",
             file: "",
             source_url: "",
             terms_accepted: false,
@@ -108,24 +104,41 @@ export default defineComponent({
                                 {{ form.errors.title }}
                             </span>
                         </div>
-                        <div>
-                            <label
-                                class="block text-sm font-medium leading-6 text-zinc-200"
-                                for="autor"
-                                >Autor:</label
-                            >
-                            <Input
-                                tye="text"
-                                name="autor"
-                                id="autor"
-                                class="w-80 bg-transparent text-zinc-200 capitalize border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                v-model="form.author"
-                            />
-                            <span class="text-red-500 text-xs">
-                                {{ form.errors.author }}
-                            </span>
+                        <div class="flex space-x-2">
+                            <div class="flex flex-col">
+                                <label
+                                    class="text-sm font-medium leading-6 text-zinc-200"
+                                    for="date"
+                                    >Data:</label
+                                >
+                                <Input
+                                    class="w-40 bg-transparent text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                    type="date"
+                                    name="date"
+                                    id="date"
+                                    v-model="form.publish_date"
+                                />
+                                <span class="text-red-500 text-xs">
+                                    {{ form.errors.publish_date }}
+                                </span>
+                            </div>
+                            <!-- <div class="flex flex-col">
+                                <label
+                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    for="time"
+                                    >Hora:</label
+                                >
+                                <Input
+                                    id="time"
+                                    name="time"
+                                    class="w-0 bg-transparent text-white border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                    type="time"
+                                    v-model="form.publish_time"
+                                />
+                            </div> -->
                         </div>
-                        <div class="mt-4">
+
+                        <!-- <div class="mt-4">
                             <label
                                 class="block text-sm font-medium leading-6 text-zinc-200"
                                 for="location"
@@ -142,40 +155,8 @@ export default defineComponent({
                             <span class="text-red-500 text-xs">
                                 {{ form.errors.location }}
                             </span>
-                        </div>
-                        <div class="mt-4 flex space-x-2">
-                            <div class="flex flex-col">
-                                <label
-                                    class="w-60 text-sm font-medium leading-6 text-zinc-200"
-                                    for="date"
-                                    >Data:</label
-                                >
-                                <Input
-                                    class="w-50 bg-transparent text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                    type="date"
-                                    name="date"
-                                    id="date"
-                                    v-model="form.publish_date"
-                                />
-                                <span class="text-red-500 text-xs">
-                                    {{ form.errors.publish_date }}
-                                </span>
-                            </div>
-                            <div class="flex flex-col">
-                                <label
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
-                                    for="time"
-                                    >Hora:</label
-                                >
-                                <Input
-                                    id="time"
-                                    name="time"
-                                    class="w-25 bg-transparent text-white border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                    type="time"
-                                    v-model="form.publish_time"
-                                />
-                            </div>
-                        </div>
+                        </div> -->
+
                         <div class="mt-4">
                             <label
                                 class="block text-sm font-medium leading-6 text-zinc-200"
@@ -190,23 +171,42 @@ export default defineComponent({
                                 v-model="form.source_url"
                             />
                         </div>
+                        <div class="mt-4">
+                            <label
+                                class="block text-sm font-medium leading-6 text-zinc-200"
+                                for="autor"
+                                >Autor:</label
+                            >
+                            <Input
+                                tye="text"
+                                name="autor"
+                                id="autor"
+                                class="w-50 bg-transparent text-zinc-200 capitalize border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                v-model="form.author"
+                            />
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.author }}
+                            </span>
+                        </div>
                         <div class="flex items-center">
-                            <div class="mt-4 card flex justify-center gap-4">
+                            <div class="mt-4 justify-center gap-4">
                                 <label
                                     class="block text-sm font-medium leading-6 text-zinc-200"
-                                    for="file"
+                                    for="file-upload"
                                     >Thumbnail:</label
                                 >
                                 <FileUpload
-                                    class="text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500"
+                                    class="flex px-2 text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 hover:text-lg"
                                     focus:ring-1
+                                    id="file-upload"
                                     mode="basic"
                                     name="demo[]"
-                                    label="Escolher arquivo"
+                                    chooseLabel="&nbsp;"
                                     url="/api/upload"
                                     severity="info"
                                     accept="image/*"
                                     maxFileSize="1000000"
+                                    v-model="form.file"
                                 />
                             </div>
                         </div>
