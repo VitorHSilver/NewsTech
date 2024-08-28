@@ -25,7 +25,6 @@ const props = defineProps({
 });
 const { props: pageProps } = usePage();
 const user = pageProps.auth.user;
-console.log(user);
 </script>
 
 <template>
@@ -73,7 +72,6 @@ console.log(user);
                             </span></Link
                         >
                     </MenubarItem>
-                    <MenubarSeparator />
                     <MenubarItem v-if="!user && urlAtual !== '/users'">
                         <Link
                             :href="route('users.index')"

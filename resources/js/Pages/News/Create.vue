@@ -2,18 +2,19 @@
 import { Head, useForm } from "@inertiajs/vue3";
 import HeaderMenu from "./_Components/HeaderMenu.vue";
 import Input from "@/components/ui/input/Input.vue";
-import { QuillEditor } from "@vueup/vue-quill";
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
 import Button from "@/components/ui/button/Button.vue";
-import { defineComponent, watch, watchEffect } from "vue";
+import { defineComponent } from "vue";
+import { MdEditor } from "md-editor-v3";
+import FileUpload from "primevue/fileupload";
 
 export default defineComponent({
     components: {
         Head,
         HeaderMenu,
         Input,
-        QuillEditor,
         Button,
+        MdEditor,
+        FileUpload,
     },
     props: {
         auth: {
@@ -37,20 +38,12 @@ export default defineComponent({
             content: "",
             author: user.firstName,
             publish_date: getCurrentDate(),
-            publish_time: "",
-            location: "",
+            // publish_time: "",
+            // location: "",
             file: "",
             source_url: "",
             terms_accepted: false,
         });
-
-        watchEffect(() => {
-            console.log("form.content mudou para:", form.content.innerText);
-        });
-
-        const updateContent = (content) => {
-            form.content = content;
-        };
 
         const handleSubmit = () => {
             form.post(route("news.store"), {
@@ -70,7 +63,6 @@ export default defineComponent({
         return {
             form,
             handleSubmit,
-            updateContent,
         };
     },
 });
@@ -78,16 +70,15 @@ export default defineComponent({
 
 <template>
     <Head title="Publish your news" />
-    <HeaderMenu :user="user" />
-
+    <main class="px-10">
+    <HeaderMenu :user="user"/>
     <section class="items-center mx-auto max-w-6xl">
-        <main class="px-4">
             <div
                 class="text-black flex justify-center items-center w-full rounded-lg"
             >
                 <form
                     @submit.prevent="handleSubmit"
-                    class="w-full bg-gray-200/20 shadow-md shadow-gray-900/25 p-4 rounded-lg"
+                    class="w-full bg-gray-100/20 shadow-md shadow-gray-900/25 p-4 rounded-lg"
                 >
                     <div class="mt-2 px-4">
                         <span class="flex justify-start text-md text-gray-500"
@@ -112,50 +103,15 @@ export default defineComponent({
                                 {{ form.errors.title }}
                             </span>
                         </div>
-                        <div>
-                            <label
-                                class="block text-sm font-medium leading-6 text-zinc-200"
-                                for="autor"
-                                >Autor:</label
-                            >
-                            <Input
-                                tye="text"
-                                name="autor"
-                                id="autor"
-                                class="w-80 bg-transparent text-zinc-200 capitalize border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                v-model="form.author"
-                            />
-                            <span class="text-red-500 text-xs">
-                                {{ form.errors.author }}
-                            </span>
-                        </div>
-                        <div class="mt-4">
-                            <label
-                                class="block text-sm font-medium leading-6 text-zinc-200"
-                                for="location"
-                                >Local:</label
-                            >
-                            <Input
-                                type="text"
-                                name="location"
-                                id="location"
-                                autocomplete="street-address"
-                                class="w-full text-zinc-200 bg-transparent border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                v-model="form.location"
-                            />
-                            <span class="text-red-500 text-xs">
-                                {{ form.errors.location }}
-                            </span>
-                        </div>
-                        <div class="mt-4 flex space-x-2">
+                        <div class="flex space-x-2">
                             <div class="flex flex-col">
                                 <label
-                                    class="w-60 text-sm font-medium leading-6 text-zinc-200"
+                                    class="text-sm font-medium leading-6 text-zinc-200"
                                     for="date"
                                     >Data:</label
                                 >
                                 <Input
-                                    class="w-50 bg-transparent text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                    class="w-40 bg-transparent text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                     type="date"
                                     name="date"
                                     id="date"
@@ -165,22 +121,8 @@ export default defineComponent({
                                     {{ form.errors.publish_date }}
                                 </span>
                             </div>
-                            <div class="flex flex-col">
-                                <label
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
-                                    for="time"
-                                    >Hora:</label
-                                >
-                                <Input
-                                    id="time"
-                                    name="time"
-                                    class="w-25 bg-transparent text-white border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                    type="time"
-                                    v-model="form.publish_time"
-                                />
-                            </div>
                         </div>
-                        <div class="mt-4">
+                    <div class="mt-4">
                             <label
                                 class="block text-sm font-medium leading-6 text-zinc-200"
                                 for="source"
@@ -194,17 +136,42 @@ export default defineComponent({
                                 v-model="form.source_url"
                             />
                         </div>
-                        <div>
-                            <div class="mt-4">
+                        <div class="mt-4">
+                            <label
+                                class="block text-sm font-medium leading-6 text-zinc-200"
+                                for="autor"
+                                >Autor:</label
+                            >
+                            <Input
+                                tye="text"
+                                name="autor"
+                                id="autor"
+                                class="w-50 bg-transparent text-zinc-200 capitalize border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                v-model="form.author"
+                            />
+                            <span class="text-red-500 text-xs">
+                                {{ form.errors.author }}
+                            </span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="mt-4 justify-center gap-4">
                                 <label
                                     class="block text-sm font-medium leading-6 text-zinc-200"
-                                    for="file"
+                                    for="file-upload"
                                     >Thumbnail:</label
                                 >
-                                <Input
-                                    class="w-80 text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                    type="file"
-                                    v-model="form.image"
+                                <FileUpload
+                                    class="flex px-2 text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 hover:text-lg"
+                                    focus:ring-1
+                                    id="file-upload"
+                                    mode="basic"
+                                    name="demo[]"
+                                    chooseLabel="&nbsp;"
+                                    url="/api/upload"
+                                    severity="info"
+                                    accept="image/*"
+                                    maxFileSize="1000000"
+                                    v-model="form.file" 
                                 />
                             </div>
                         </div>
@@ -216,12 +183,13 @@ export default defineComponent({
                                 >Resumo da informação:</label
                             >
                             <div>
-                                <QuillEditor
-                                    id="content"
-                                    name="content"
-                                    class="w-full resize-y pb-4 mb-4 text-zinc-200 bg-transparent border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                    v-model:value="form.content"
-                                    @input="updateContent"
+                                <MdEditor
+                                    v-model="form.content"
+                                    theme="dark"
+                                    codeTheme="github"
+                                    language="en-US"
+                                    placeholder="Digite aqui o conteúdo da notícia"
+                                    noUploadImg="false"
                                 />
                             </div>
                             <span class="text-red-500 text-xs">
@@ -249,6 +217,6 @@ export default defineComponent({
                     </div>
                 </form>
             </div>
-        </main>
-    </section>
+        </section>
+    </main>
 </template>
