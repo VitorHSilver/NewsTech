@@ -103,7 +103,6 @@ class NewsController extends Controller
                 'user' => $user,
             ]);
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return redirect()->back()->with('error', 'Erro ao salvar a notícia.' . $e->getMessage());
         }
     }
