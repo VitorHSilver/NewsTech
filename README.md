@@ -32,7 +32,7 @@ sudo apt update
 ```bash
 sudo apt install -y php8.2
 ```
-#### 2.3 - Instale Extensões Adicionais (opcional):
+#### 2.3 - Instale Extensões Adicionais:
 
 ```bash
 composer install
