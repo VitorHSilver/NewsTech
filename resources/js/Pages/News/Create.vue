@@ -70,10 +70,9 @@ export default defineComponent({
 
 <template>
     <Head title="Publish your news" />
-    <HeaderMenu :user="user" />
-
+    <main class="px-10">
+    <HeaderMenu :user="user"/>
     <section class="items-center mx-auto max-w-6xl">
-        <main class="px-4">
             <div
                 class="text-black flex justify-center items-center w-full rounded-lg"
             >
@@ -122,42 +121,8 @@ export default defineComponent({
                                     {{ form.errors.publish_date }}
                                 </span>
                             </div>
-                            <!-- <div class="flex flex-col">
-                                <label
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
-                                    for="time"
-                                    >Hora:</label
-                                >
-                                <Input
-                                    id="time"
-                                    name="time"
-                                    class="w-0 bg-transparent text-white border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                    type="time"
-                                    v-model="form.publish_time"
-                                />
-                            </div> -->
                         </div>
-
-                        <!-- <div class="mt-4">
-                            <label
-                                class="block text-sm font-medium leading-6 text-zinc-200"
-                                for="location"
-                                >Local:</label
-                            >
-                            <Input
-                                type="text"
-                                name="location"
-                                id="location"
-                                autocomplete="street-address"
-                                class="w-full text-zinc-200 bg-transparent border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
-                                v-model="form.location"
-                            />
-                            <span class="text-red-500 text-xs">
-                                {{ form.errors.location }}
-                            </span>
-                        </div> -->
-
-                        <div class="mt-4">
+                    <div class="mt-4">
                             <label
                                 class="block text-sm font-medium leading-6 text-zinc-200"
                                 for="source"
@@ -252,6 +217,6 @@ export default defineComponent({
                     </div>
                 </form>
             </div>
-        </main>
-    </section>
+        </section>
+    </main>
 </template>

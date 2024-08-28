@@ -67,8 +67,8 @@ export default defineComponent({
 
 <template>
     <Head title="Profile"></Head>
-    <SuperiorMenu :user="user" :showUserName="false"></SuperiorMenu>
     <main class="px-10">
+        <SuperiorMenu :user="user" :showUserName="false"></SuperiorMenu>
         <div class="flex justify-center mt-20">
             <div>
                 <h1

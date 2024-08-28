@@ -72,7 +72,6 @@ const user = pageProps.auth.user;
                             </span></Link
                         >
                     </MenubarItem>
-                    <MenubarSeparator />
                     <MenubarItem v-if="!user && urlAtual !== '/users'">
                         <Link
                             :href="route('users.index')"
