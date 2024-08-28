@@ -206,7 +206,7 @@ export default defineComponent({
                                     severity="info"
                                     accept="image/*"
                                     maxFileSize="1000000"
-                                    v-model="form.file"
+                                    v-model="form.file" 
                                 />
                             </div>
                         </div>

@@ -77,24 +77,35 @@ class NewsController extends Controller
             'date.date' => 'A data deve ser uma data válida.',
         ]);
 
+
         try {
-            $news = News::create([
+
+        // Verificar se o usuário está autenticado
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'Usuário não autenticado.');
+        }
+
+        $news = News::create([
+                'user_id' => $user->id,
                 'title' => strtolower($newsPost['title']),
                 'content' => strtolower($newsPost['content']),
                 'author_alias' => strtolower($newsPost['author']),
-                'source_url' => $newsPost['source_url'],
-                'publish_date' => $newsPost['date'],
-                'publish_time' => $newsPost['date'],
-                'location' => $newsPost['date'],
+                'source' => $newsPost['source_url'],
+                'publish_date' => $newsPost['publish_date'],    
+                'publish_time' => null,
+                'location' => null,
                 'terms_accepted' => $newsPost['terms_accepted'],
             ]);
+            // Redirecionamento para a página de perfil do usuário
+            return Inertia::render('Users/Show', [
+                'user' => $user,
+            ]);
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Erro ao salvar a notícia.' . $e->getMessage());
         }
-        // Redirecionamento para a página de perfil do usuário
-        return Inertia::render('Users/Show', [
-            'user' => Auth::user(),
-        ]);
     }
 
     /**

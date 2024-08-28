@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     protected $fillable = [
+        'user_id',
         'title',
         'content',
         'image',
-        'source_url',
+        'source',
         'publish_date',
         'publish_time',
         'location',
