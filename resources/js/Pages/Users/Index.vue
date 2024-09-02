@@ -107,24 +107,24 @@ option {
     <main class="px-10">
         <SuperiorMenu :url-atual="urlAtual" />
         <div
-            class="flex items-center justify-center backgroundProject py-4 sm:py-6"
+            class="flex items-center justify-center backgroundProject py-4 sm:py-4"
         >
             <form
                 @submit.prevent="handleSubmit"
-                class="bg-gray-200/20 shadow-md shadow-gray-900/25 p-10 rounded-lg"
+                class="bg-gray-50 shadow-md shadow-gray-400 py-8 p-14 rounded-lg"
             >
                 <div class="space-y-12">
-                    <div>
-                        <span class="flex justify-start text-md text-gray-500"
+                    <div class="mt-4">
+                        <span class="flex justify-start text-md text-blue-900"
                             >Tech News</span
                         >
                         <div
-                            class="mt-4 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6"
+                            class="mt-2 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6"
                         >
                             <div class="sm:col-span-2">
                                 <label
                                     for="name"
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-gray-700"
                                     >Primeiro Nome</label
                                 >
                                 <div class="mt-2">
@@ -133,7 +133,7 @@ option {
                                         name="name"
                                         id="name"
                                         autocomplete="given-name"
-                                        class="h-9 capitalize bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 capitalize bg-transparent text-gray-900 border-gray-900 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.firstName"
                                     />
                                 </div>
@@ -144,7 +144,7 @@ option {
                             <div class="sm:col-span-2">
                                 <label
                                     for="lastName"
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-zinc-700"
                                     >Sobrenome</label
                                 >
                                 <div class="mt-2">
@@ -153,7 +153,7 @@ option {
                                         name="lastName"
                                         id="lastName"
                                         autocomplete="given-name"
-                                        class="h-9 capitalize bg-transparent text-gray-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 capitalize bg-transparent text-gray-900 border-gray-900 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.lastName"
                                     />
                                 </div>
@@ -165,7 +165,7 @@ option {
                             <div class="sm:col-span-2 relative block w-full">
                                 <label
                                     for="password"
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-zinc-700"
                                     >Senha</label
                                 >
                                 <div class="mt-2">
@@ -176,7 +176,7 @@ option {
                                                 ? 'text'
                                                 : 'password'
                                         "
-                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-900 bg-transparent text-gray-900 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.password"
                                     />
                                 </div>
@@ -197,7 +197,7 @@ option {
                             <div class="sm:col-span-4 inputEmail">
                                 <label
                                     for="email"
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-zinc-600"
                                     >E-mail</label
                                 >
                                 <div class="mt-2">
@@ -207,7 +207,7 @@ option {
                                         type="email"
                                         autocomplete="email"
                                         placeholder="email@email.com"
-                                        class="h-9 lowercase bg-transparent text-gray-200 border-gray-100 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 lowercase bg-transparent text-gray-900 border-gray-900 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.email"
                                     />
                                 </div>
@@ -220,7 +220,7 @@ option {
                             <div class="sm:col-span-2">
                                 <label
                                     for="postal-code"
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-zinc-600"
                                     >CEP</label
                                 >
                                 <div class="mt-2">
@@ -228,7 +228,7 @@ option {
                                         type="text"
                                         name="postal-code"
                                         id="postal-code"
-                                        class="h-9 bg-transparent text-gray-200 border-gray-100 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 bg-transparent text-gray-900 border-gray-900 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.postalCode"
                                         placeholder="00000-000"
                                         @input="zipCodeFormatting"
@@ -243,7 +243,7 @@ option {
                             <div class="sm:col-span-4">
                                 <label
                                     for="street-address"
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-zinc-600"
                                     >Endereço</label
                                 >
                                 <div class="mt-2">
@@ -252,7 +252,7 @@ option {
                                         name="street-address"
                                         id="street-address"
                                         autocomplete="street-address"
-                                        class="h-9 capitalize bg-transparent text-gray-200 border-gray-100 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 capitalize bg-transparent text-gray-900 border-gray-900 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.streetAddress"
                                     />
                                 </div>
@@ -263,7 +263,7 @@ option {
                             <div class="sm:col-span-2">
                                 <label
                                     for="country"
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-zinc-600"
                                     >Pais</label
                                 >
                                 <div class="mt-2">
@@ -271,7 +271,7 @@ option {
                                         id="country"
                                         name="country"
                                         autocomplete="country-name"
-                                        class="w-full bg-transparent rounded-md border-0 py-2 text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:max-w-[200px] sm:text-sm sm:leading-6 p-2"
+                                        class="w-full bg-transparent rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-900 focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:max-w-[200px] sm:text-sm sm:leading-6 p-2"
                                         v-model="form.country"
                                     >
                                         <option>Brazil</option>
@@ -287,7 +287,7 @@ option {
                             <div class="sm:col-span-2 sm:col-start-1">
                                 <label
                                     for="neighborhood"
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-zinc-600"
                                     >Bairro</label
                                 >
                                 <div class="mt-2">
@@ -296,7 +296,7 @@ option {
                                         name="neighborhood"
                                         id="neighborhood"
                                         autocomplete="address-level3"
-                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-900 bg-transparent text-gray-900 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.neighborhood"
                                     />
                                 </div>
@@ -308,7 +308,7 @@ option {
                             <div class="sm:col-span-2">
                                 <label
                                     for="city"
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-zinc-600"
                                     >Cidade</label
                                 >
                                 <div class="mt-2">
@@ -317,7 +317,7 @@ option {
                                         name="city"
                                         id="city"
                                         autocomplete="address-level2"
-                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-900 bg-transparent text-gray-900 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.city"
                                     />
                                 </div>
@@ -328,7 +328,7 @@ option {
                             <div class="sm:col-span-2">
                                 <label
                                     for="region"
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-zinc-600"
                                     >Estado</label
                                 >
                                 <div class="mt-2">
@@ -337,7 +337,7 @@ option {
                                         name="region"
                                         id="region"
                                         autocomplete="address-level1"
-                                        class="h-9 border-gray-100 bg-transparent text-gray-200 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                        class="h-9 border-gray-900 bg-transparent text-gray-900 focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                         v-model="form.region"
                                     />
                                 </div>

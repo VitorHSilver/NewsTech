@@ -78,17 +78,17 @@ export default defineComponent({
             >
                 <form
                     @submit.prevent="handleSubmit"
-                    class="w-full bg-gray-100/20 shadow-md shadow-gray-900/25 p-4 rounded-lg"
+                    class="w-full bg-gray-50 shadow-md shadow-gray-700 p-10 py-8 mb-4 rounded-lg"
                 >
                     <div class="mt-2 px-4">
-                        <span class="flex justify-start text-md text-gray-500"
+                        <span class="flex justify-start text-md text-blue-900"
                             >Tech News</span
                         >
                     </div>
                     <div class="grid grid-cols-2 gap-x-14 p-4">
                         <div>
                             <label
-                                class="block text-sm font-medium leading-6 text-zinc-200"
+                                class="block text-sm font-medium leading-6 text-gray-700"
                                 for="title"
                                 >Titulo</label
                             >
@@ -96,7 +96,7 @@ export default defineComponent({
                                 type="text"
                                 name="title"
                                 id="title"
-                                class="text-zinc-200 bg-transparent capitalize border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                class="text-zinc-900 bg-transparent capitalize border-gray-900 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                 v-model="form.title"
                             />
                             <span class="text-red-500 text-xs">
@@ -106,12 +106,12 @@ export default defineComponent({
                         <div class="flex space-x-2">
                             <div class="flex flex-col">
                                 <label
-                                    class="text-sm font-medium leading-6 text-zinc-200"
+                                    class="text-sm font-medium leading-6 text-zinc-700"
                                     for="date"
                                     >Data:</label
                                 >
                                 <Input
-                                    class="w-40 bg-transparent text-zinc-200 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                    class="w-40 bg-transparent text-zinc-900 border-gray-900 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                     type="date"
                                     name="date"
                                     id="date"
@@ -124,12 +124,12 @@ export default defineComponent({
                         </div>
                     <div class="mt-4">
                             <label
-                                class="block text-sm font-medium leading-6 text-zinc-200"
+                                class="block text-sm font-medium leading-6 text-zinc-700"
                                 for="source"
                                 >Fonte:</label
                             >
                             <Input
-                                class="w-full text-zinc-200 bg-transparent mb-2 border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                class="w-full text-zinc-900 bg-transparent mb-2 border-gray-900 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                 type="text"
                                 name="source"
                                 id="source"
@@ -138,7 +138,7 @@ export default defineComponent({
                         </div>
                         <div class="mt-4">
                             <label
-                                class="block text-sm font-medium leading-6 text-zinc-200"
+                                class="block text-sm font-medium leading-6 text-zinc-700"
                                 for="autor"
                                 >Autor:</label
                             >
@@ -146,7 +146,7 @@ export default defineComponent({
                                 tye="text"
                                 name="autor"
                                 id="autor"
-                                class="w-50 bg-transparent text-zinc-200 capitalize border-gray-100 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                                class="w-50 bg-transparent text-zinc-900 capitalize border-gray-900 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
                                 v-model="form.author"
                             />
                             <span class="text-red-500 text-xs">
@@ -156,7 +156,7 @@ export default defineComponent({
                         <div class="flex items-center">
                             <div class="mt-4 justify-center gap-4">
                                 <label
-                                    class="block text-sm font-medium leading-6 text-zinc-200"
+                                    class="block text-sm font-medium leading-6 text-zinc-700"
                                     for="file-upload"
                                     >Thumbnail:</label
                                 >
@@ -178,7 +178,7 @@ export default defineComponent({
 
                         <div class="col-span-2 mt-4">
                             <label
-                                class="block text-sm font-medium leading-6 text-zinc-200 mb-1"
+                                class="block text-sm font-medium leading-6 text-zinc-700 mb-1"
                                 for="content"
                                 >Resumo da informação:</label
                             >
@@ -197,7 +197,7 @@ export default defineComponent({
                             </span>
                         </div>
                         <div class="mt-1 col-span-2 flex-wrap">
-                            <label type="checkbox" class="text-zinc-200">
+                            <label type="checkbox" class="text-zinc-900">
                                 <input
                                     type="checkbox"
                                     class="text-zinc-200"
