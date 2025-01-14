@@ -7,8 +7,8 @@ import "md-editor-v3/lib/style.css";
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
-// import { ZiggyVue } from "../../vendor/tightenco/ziggy";
-import { ZiggyVue } from 'ziggy-js';
+import { ZiggyVue } from "../../vendor/tightenco/ziggy";
+import { Ziggy } from './ziggy';
 import { Head } from "@inertiajs/vue3";
 import { router } from "@inertiajs/vue3";
 import Vue3Toastify, { toast } from "vue3-toastify";
@@ -28,7 +28,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue)
+            .use(ZiggyVue, Ziggy)
             .use(router)
             .use(Head)
             .use(PrimeVue)
