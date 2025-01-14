@@ -15,7 +15,8 @@ class UserAdminProfile extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'name' => 'admin',
+            'firstName' => 'admin',
+            'lastName' => 'ADM',
             'email' => 'vitor.adm@teste.com',
             'password' => Hash::make('1234'),
             'country' => strtolower('Brasil'),
